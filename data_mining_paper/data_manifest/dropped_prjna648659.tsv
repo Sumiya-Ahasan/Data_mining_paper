@@ -1,0 +1,3 @@
+run_accession	study_accession	instrument_model	library_layout	read_count	base_count	sample_title	sample_alias	country	isolation_source	first_public	fastq_bytes
+SRR12326541	PRJNA648659	Illumina NovaSeq 6000	PAIRED	21707816	6555760432	AS10	AS10	Colombia: Medellin	wastewater	2021-05-27	1438996277;1474790616
+SRR13735366	PRJNA648659	Illumina NovaSeq 6000	PAIRED	13358508	4034269416	wastewater_19	E1	Colombia: Medellin	wastewater	2021-05-27	894511891;918199010

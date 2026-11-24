@@ -1,0 +1,31 @@
+run_accession	sample_alias	isolation_source	read_count	base_count	fastq_bytes
+SRR28520263	CB-INF-10	raw influent to wastewater treatment plant	299616275	90484115050	17347444806;17333215655
+SRR28520266	CB-INF-7	raw influent to wastewater treatment plant	242198191	73143853682	14055558620;14025116876
+SRR28520269	CB-INF-4	raw influent to wastewater treatment plant	426051178	128667455756	24349072629;24303887377
+SRR28520270	CB-SE-10	effluent from secondary clarifiers of wastewater treatment plant	302131962	91243852524	17582453124;17553473483
+SRR28520274	CB-SE-6	effluent from secondary clarifiers of wastewater treatment plant	300017165	90605183830	17429552052;17407943522
+SRR28520279	CB-SE-1	effluent from secondary clarifiers of wastewater treatment plant	334373238	100980717876	19284139944;19265400470
+SRR28520280	CB-INF-3	raw influent to wastewater treatment plant	313029087	94534784274	18207330922;18188601484
+SRR28520281	CB-AS-10	aeration basin of wastewater treatment plant (activated sludge)	293987102	88784104804	17134441504;17121692663
+SRR28520283	CB-AS-8	aeration basin of wastewater treatment plant (activated sludge)	363978526	109921514852	21124472933;21117703504
+SRR28520285	CB-AS-6	aeration basin of wastewater treatment plant (activated sludge)	322004119	97245243938	18531184419;18477977056
+SRR28520289	CB-AS-2	aeration basin of wastewater treatment plant (activated sludge)	322151025	97289609550	18583319448;18550562377
+SRR28520290	CB-AS-1	aeration basin of wastewater treatment plant (activated sludge)	331646600	100157273200	19102716493;19082333990
+SRR28520272	CB-SE-8	effluent from secondary clarifiers of wastewater treatment plant	337577171	101948305642	19579696501;19540921996
+SRR28520282	CB-AS-9	aeration basin of wastewater treatment plant (activated sludge)	303797435	91746825370	17668664144;17653433714
+SRR28520284	CB-AS-7	aeration basin of wastewater treatment plant (activated sludge)	322291525	97332040550	18768521353;18752111969
+SRR28520286	CB-AS-5	aeration basin of wastewater treatment plant (activated sludge)	346187206	104548536212	19968003050;19924499451
+SRR28520287	CB-AS-4	aeration basin of wastewater treatment plant (activated sludge)	344773862	104121706324	19908968324;19877397793
+SRR28520292	CB-INF-1	raw influent to wastewater treatment plant	267506525	80786970550	15537267338;15514475197
+SRR28520264	CB-INF-9	raw influent to wastewater treatment plant	310724685	93838854870	18111100618;18098955455
+SRR28520268	CB-INF-5	raw influent to wastewater treatment plant	268801935	81178184370	15697623315;15679882703
+SRR28520273	CB-SE-7	effluent from secondary clarifiers of wastewater treatment plant	258242917	77989360934	14989404119;14963698756
+SRR28520277	CB-SE-3	effluent from secondary clarifiers of wastewater treatment plant	337491992	101922581584	19608991035;19562177716
+SRR28520278	CB-SE-2	effluent from secondary clarifiers of wastewater treatment plant	325556865	98318173230	18870434290;18804086290
+SRR28520291	CB-INF-2	raw influent to wastewater treatment plant	341132431	103021994162	19840869695;19828202216
+SRR28520267	CB-INF-6	raw influent to wastewater treatment plant	357038305	107825568110	20784586674;20768143929
+SRR28520271	CB-SE-9	effluent from secondary clarifiers of wastewater treatment plant	287616773	86860265446	16754797876;16731736281
+SRR28520265	CB-INF-8	raw influent to wastewater treatment plant	279737818	84480821036	16189177166;16174526904
+SRR28520275	CB-SE-5	effluent from secondary clarifiers of wastewater treatment plant	269342131	81341323562	15687937102;15661310714
+SRR28520276	CB-SE-4	effluent from secondary clarifiers of wastewater treatment plant	327133526	98794324852	18946228656;18900722023
+SRR28520288	CB-AS-3	aeration basin of wastewater treatment plant (activated sludge)	280906468	84833753336	16323023962;16299276381
