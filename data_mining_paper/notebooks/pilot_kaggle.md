@@ -1,12 +1,12 @@
 # Pilot on Kaggle — notebook cells
 
 **Settings:** Internet ON · Accelerator None · attach your two private datasets (**+ Add Input**):
-`card90-decoys-ref` and `ww-backgrounds-5m`. Run as **Save Version → Save & Run All (Commit)** so it survives closing the browser. Expected runtime ≈ 2–4 h (20 samples).
+`card90-decoys-ref` and `ww-bg-5m` (Kaggle unzipped the backgrounds to `.fastq`; the scripts accept both). Run as **Save Version → Save & Run All (Commit)** so it survives closing the browser. Expected runtime ≈ 2–4 h (20 samples).
 
 ### Cell 1 — find dataset paths (check once, then edit REF/BG below)
 ```python
 !ls /kaggle/input/
-!find /kaggle/input -maxdepth 3 -name "card90_decoys.fasta" -o -maxdepth 3 -name "ERR1713384_1.fastq.gz"
+!find /kaggle/input -maxdepth 3 -name "card90_decoys.fasta" -o -maxdepth 3 -name "ERR1713384_1.fastq*"
 ```
 
 ### Cell 2 — code + tools
@@ -24,9 +24,14 @@ tok = UserSecretsClient().get_secret("GITHUB_TOKEN")
 ```python
 import os, glob
 REF = "/kaggle/input/card90-decoys-ref/ref"        # <- edit if Cell 1 shows a different path
-BG  = "/kaggle/input/ww-backgrounds-5m/bg"          # <- edit if Cell 1 shows a different path
+BG  = "/kaggle/input/ww-bg-5m/bg"          # <- edit if Cell 1 shows a different path
 k = glob.glob("/kaggle/input/**/kma/kma", recursive=True)
-if not k:
+ok = False
+if k:  # dataset files can lose the executable bit -> copy + chmod, then test
+    os.system(f"cp {k[0]} /kaggle/working/kma_bin && chmod +x /kaggle/working/kma_bin")
+    ok = os.system("/kaggle/working/kma_bin -v > /dev/null 2>&1") == 0
+    k = ["/kaggle/working/kma_bin"]
+if not ok:
     os.system("git clone -q https://bitbucket.org/genomicepidemiology/kma.git /kaggle/working/kma && make -s -C /kaggle/working/kma")
     k = ["/kaggle/working/kma/kma"]
 os.environ["KMA"] = k[0]; print("KMA:", k[0]); os.system(f"{k[0]} -v")

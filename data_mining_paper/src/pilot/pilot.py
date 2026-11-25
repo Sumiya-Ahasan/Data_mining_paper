@@ -163,8 +163,17 @@ def kma(r1, r2, db, prefix, threads):
     sh(f"{os.environ.get('KMA', 'kma')} -ipe {r1} {r2} -o {prefix} -t_db {db} -t {threads} -nf -na > {prefix}.log 2>&1")
 
 
+def bg_file(bgdir, run, mate):
+    """Kaggle unzips .fastq.gz on dataset upload, so accept .fastq.gz or .fastq."""
+    for ext in (".fastq.gz", ".fastq", ".fq.gz", ".fq"):
+        f = Path(bgdir) / f"{run}_{mate}{ext}"
+        if f.exists():
+            return f
+    raise FileNotFoundError(f"no FASTQ for {run}_{mate} in {bgdir}")
+
+
 def trim_cmd(src, dst):
-    return f"zcat {src} | awk 'NR%2==0{{print substr($0,1,{READ_LEN});next}}{{print}}' | gzip -1 > {dst}"
+    return f"zcat -f {src} | awk 'NR%2==0{{print substr($0,1,{READ_LEN});next}}{{print}}' | gzip -1 > {dst}"
 
 
 def cmd_bgprep(a):
@@ -173,7 +182,7 @@ def cmd_bgprep(a):
         o = work / "bg"; o.mkdir(parents=True, exist_ok=True)
         r1, r2 = o / f"{run}_1.150.fq.gz", o / f"{run}_2.150.fq.gz"
         if not r2.exists():
-            sh(trim_cmd(bgdir / f"{run}_1.fastq.gz", r1)); sh(trim_cmd(bgdir / f"{run}_2.fastq.gz", r2))
+            sh(trim_cmd(bg_file(bgdir, run, 1), r1)); sh(trim_cmd(bg_file(bgdir, run, 2), r2))
         if not (o / f"{run}.bam").exists():
             bt2(r1, r2, ref / "idx/card90d", o / f"{run}.bam", a.threads)
         if not (o / f"{run}.res").exists():
@@ -217,7 +226,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("cmd", choices=["split", "design", "genomes", "label", "bgprep", "simulate"])
     p.add_argument("--ref", default="/kaggle/input/card90-decoys-ref/ref")
-    p.add_argument("--bg", default="/kaggle/input/ww-backgrounds-5m/bg")
+    p.add_argument("--bg", default="/kaggle/input/ww-bg-5m/bg")
     p.add_argument("--work", default="/kaggle/working/pilot")
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--seed", type=int, default=2026)
