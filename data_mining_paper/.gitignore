@@ -1,0 +1,17 @@
+*.fastq
+*.fastq.gz
+*.fq.gz
+*.bam
+*.sam
+*.bt2
+*.comp.b
+*.length.b
+*.name
+*.seq.b
+*.tar.bz2
+ref/
+data/
+__pycache__/
+.ipynb_checkpoints/
+data_manifest/davis2025/*.pdf
+data_manifest/davis2025/*.xlsx

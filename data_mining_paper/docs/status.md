@@ -1,5 +1,7 @@
 # Status (update after every work session)
 
+Workflow + timeline: see `docs/workflow.md`.
+
 Legend: [x] done · [ ] todo · (YOU) = manual step for the researcher · (C) = Claude can do
 
 ## Week 1 — foundations
@@ -12,18 +14,23 @@ Legend: [x] done · [ ] todo · (YOU) = manual step for the researcher · (C) = 
 - [x] (C) `src/build_reference.sh`, `src/subsample_backgrounds.sh` (written, NOT yet run)
 - [x] PRJNA648659 dropped (codes unverifiable); matrix test from PRJNA1095031 CB-INF-1 / CB-AS-1 / CB-SE-1
 - [x] (C) Raphenya 2022 isolate table (174, GCF accessions) → `data_manifest/raphenya2022_strain_metadata.tsv`
-- [ ] (YOU) Approve the isolate split proposal in decision_log (genus-skew problem)
+- [x] Isolate split approved → data_manifest/isolate_split.tsv
 - [x] Davis 2025 main PDF in data_manifest/davis2025 (methods extracted)
 - [ ] (YOU) Download SI files es4c08284_si_001.pdf + es4c08284_si_002.xlsx (browser; scripts get 403)
 - [ ] (YOU) Get meta sequin reference FASTA + NTC list (sequins.bio or Anaquin resources)
-- [ ] (YOU) Kaggle: run `build_reference.sh` → record CARD version + cluster/decoy counts in decision_log
-- [ ] (YOU) Kaggle: `subsample_backgrounds.sh data_manifest/bg_hiseq_prjeb13831.tsv bg 5000000` (6 runs)
+- [x] Kaggle build_reference.sh done (CARD 4.0.2, 1318 clusters, 3954 decoys)
+- [ ] (YOU) Save reference output as Kaggle Dataset `card90-decoys-ref`
+- [x] HiSeq backgrounds subsampled + validated (6 x 5M pairs, all checks pass) → results/backgrounds/bg_hiseq_check.json
 - [ ] (YOU) Kaggle: `subsample_backgrounds.sh data_manifest/bg_test_prjna1095031.tsv bg 5000000 50000000` (3 runs)
 - [ ] (YOU) Save both outputs as Kaggle Dataset `ww-backgrounds-5M`
-- [ ] (YOU) Create private GitHub repo, push this folder
+- [x] GitHub repo created (files sit in subfolder data_mining_paper/; local push still rejected — tidy later)
+
+- [x] (C) Literature table (40 verified refs) → `docs/literature/literature_table.md`
+- [ ] (YOU) Read priority-A papers in the table; tick the Read column
 
 ## Week 2 — pilot (next for Claude to write)
-- [ ] (C) mix-design + InSilicoSeq simulation script
-- [ ] (C) alignment + 14-feature extraction script
-- [ ] (C) gate script G1/G2/G3
-- [ ] (YOU) run pilot on Kaggle (~20 samples), paste outputs to `results/pilot/`
+- [x] (C) Pilot design + genomes + labels + ART simulation + alignment: src/pilot/pilot.py (data_manifest/pilot_design.tsv)
+- [x] (C) Feature extraction: src/pilot/features.py (15 features + labels)
+- [x] (C) Gates G1/G2/G3: src/pilot/gates.py
+- [ ] (YOU) Save HiSeq bg/ as private Kaggle Dataset ww-backgrounds-5m (needed by pilot)
+- [ ] (YOU) Run pilot on Kaggle following notebooks/pilot_kaggle.md; send pilot_results.tgz

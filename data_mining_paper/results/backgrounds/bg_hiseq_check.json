@@ -1,0 +1,158 @@
+{
+ "ERR1713346": {
+  "pairs": 5000000,
+  "unequal_file_length": false,
+  "name_mismatch": 0,
+  "bad_format": 0,
+  "len_r1_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "len_r2_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "gc_pct": 52.38,
+  "n_pct": 0.014,
+  "mean_q": 37.2,
+  "spot_min": 1,
+  "spot_max": 27359490,
+  "total_pairs_in_run": 28198167,
+  "nonmonotonic_ids": 0,
+  "spot_span_frac": 0.97
+ },
+ "ERR1713347": {
+  "pairs": 5000000,
+  "unequal_file_length": false,
+  "name_mismatch": 0,
+  "bad_format": 0,
+  "len_r1_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "len_r2_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "gc_pct": 45.31,
+  "n_pct": 0.014,
+  "mean_q": 37.0,
+  "spot_min": 5,
+  "spot_max": 36840989,
+  "total_pairs_in_run": 37949844,
+  "nonmonotonic_ids": 0,
+  "spot_span_frac": 0.971
+ },
+ "ERR1713349": {
+  "pairs": 5000000,
+  "unequal_file_length": false,
+  "name_mismatch": 0,
+  "bad_format": 0,
+  "len_r1_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "len_r2_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "gc_pct": 50.66,
+  "n_pct": 0.019,
+  "mean_q": 36.8,
+  "spot_min": 5,
+  "spot_max": 51233390,
+  "total_pairs_in_run": 52784111,
+  "nonmonotonic_ids": 0,
+  "spot_span_frac": 0.971
+ },
+ "ERR1713384": {
+  "pairs": 5000000,
+  "unequal_file_length": false,
+  "name_mismatch": 0,
+  "bad_format": 0,
+  "len_r1_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "len_r2_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "gc_pct": 48.09,
+  "n_pct": 0.014,
+  "mean_q": 37.4,
+  "spot_min": 5,
+  "spot_max": 51697747,
+  "total_pairs_in_run": 53259350,
+  "nonmonotonic_ids": 0,
+  "spot_span_frac": 0.971
+ },
+ "ERR1713386": {
+  "pairs": 5000000,
+  "unequal_file_length": false,
+  "name_mismatch": 0,
+  "bad_format": 0,
+  "len_r1_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "len_r2_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "gc_pct": 46.8,
+  "n_pct": 0.014,
+  "mean_q": 37.7,
+  "spot_min": 5,
+  "spot_max": 62726875,
+  "total_pairs_in_run": 64613393,
+  "nonmonotonic_ids": 0,
+  "spot_span_frac": 0.971
+ },
+ "ERR1713397": {
+  "pairs": 5000000,
+  "unequal_file_length": false,
+  "name_mismatch": 0,
+  "bad_format": 0,
+  "len_r1_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "len_r2_top": [
+   [
+    151,
+    5000000
+   ]
+  ],
+  "gc_pct": 50.61,
+  "n_pct": 0.018,
+  "mean_q": 37.8,
+  "spot_min": 5,
+  "spot_max": 43313139,
+  "total_pairs_in_run": 44621047,
+  "nonmonotonic_ids": 0,
+  "spot_span_frac": 0.971
+ }
+}

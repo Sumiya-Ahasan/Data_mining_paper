@@ -1,5 +1,6 @@
 # FDR-controlled low-abundance ARG detection in wastewater metagenomes
 
+- `docs/workflow.md` — **your personal workflow + 16-week timeline (start here)**
 - `docs/plan.md` — method plan (source of truth)
 - `docs/status.md` — task checklist (who does what)
 - `docs/decision_log.md` — dated decisions and findings

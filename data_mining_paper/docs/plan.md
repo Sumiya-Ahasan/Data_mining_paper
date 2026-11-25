@@ -62,7 +62,7 @@ External (PRJNA1095031): Mix A sequins = positives; **NTC sequins (in reference,
 | G3 | domain AUC cal vs test (nulls) | > 0.6 | RQ2 = "no correction needed" (still reportable) |
 
 ## 9. Related work that MUST be cited/positioned
-- Jin & Candès 2023 (arXiv 2307.09291) weighted conformalized selection.
+- Jin & Candès 2025, Biometrika (doi:10.1093/biomet/asaf066; arXiv 2307.09291) weighted conformalized selection.
 - Bates et al. 2023 conformal p-values for outlier testing (PRDS).
 - Davis, Vikesland & Pruden 2025 ES&T 59(12):6192 — LoD/LoQ via sequins (defines LoD as lowest conc detected in all 3 replicates; no FDR).
 - Conformal for AMR *phenotype* (not metagenomic ARG detection): Corvelo Benz et al. RECOMB 2025 (MALDI-TOF); Inda-Díaz et al. mBio 2026; phylogeny-weighted conformal AST "four failures" (NeurIPS 2026) — shows non-exchangeability risk.
