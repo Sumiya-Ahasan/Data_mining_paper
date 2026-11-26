@@ -40,4 +40,7 @@ Legend: [x] done · [ ] todo · (YOU) = manual step for the researcher · (C) = 
 - [x] (YOU) Run G2 extension on Kaggle (dm_g2ext, 174/174 genomes, finished OK)
 - [x] (C) Check G2 extension: G2 FAIL (well powered) → label gaps (fragments, split HSPs) + real homologs with conserved blocks; results/g2ext/
 - [x] (C) Decoy v2 (U/N/M types, 150-bp window cap) + label v2 (merged HSPs, fragment class, all cluster members) + per-type G2; tested locally (src/make_decoys_v2.py, filter_decoys.py, window_id.py, build_reference_v2.sh)
-- [ ] (YOU) Run G2 test v2 on Kaggle (notebooks/g2v2_kaggle.md; inputs card90-decoys-ref + dm_g2ext output); send g2v2_results.tgz
+- [x] (YOU) Run G2 test v2 on Kaggle (dm_g2v2, 174/174, G2V2 FINISHED OK)
+- [x] (C) Check G2 test v2: G2 FAIL for every decoy type (U, N, M, N+M), also with target nulls in score training and when restricted to non-efflux or inactivation-only targets → results/g2v2/
+- [ ] (YOU, + supervisor) Decide the calibration-null source (decoys fail; see decision_log 2026-11-26 G2 v2)
+- [ ] (YOU) Security: rotate the GitHub token (it was stored in repo/.git/config inside Kaggle outputs of all 3 notebooks; fixed in the notebook code); delete C:/Users/User/Downloads/g2v2_results.zip after Claude's check

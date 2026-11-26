@@ -24,7 +24,7 @@ Run as **Save Version → Save & Run All (Commit)**. Expected runtime: similar t
 %cd /kaggle/working
 from kaggle_secrets import UserSecretsClient
 tok = UserSecretsClient().get_secret("GITHUB_TOKEN")
-!rm -rf /kaggle/working/repo && git clone -q https://{tok}@github.com/Sumiya-Ahasan/Data_mining_paper.git /kaggle/working/repo && echo "CLONE OK"
+!rm -rf /kaggle/working/repo && git clone -q https://{tok}@github.com/Sumiya-Ahasan/Data_mining_paper.git /kaggle/working/repo && git -C /kaggle/working/repo remote set-url origin https://github.com/Sumiya-Ahasan/Data_mining_paper.git && echo "CLONE OK"
 %cd /kaggle/working/repo/data_mining_paper
 !apt-get -qq update > /dev/null && apt-get -qq install -y bowtie2 samtools ncbi-blast+ cd-hit art-nextgen-simulation-tools > /dev/null
 !pip -q install pysam
