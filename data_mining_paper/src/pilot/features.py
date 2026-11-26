@@ -4,9 +4,11 @@
 Units = every reference in card90_decoys.fasta (1318 targets + decoys). A row is written for every unit
 with >= 1 primary Bowtie2 alignment in (background BAM + spike BAM); all other units have p = 1 later.
 
-Labels (column y): 1 = target in a spiked isolate (strict); 0 = target absent from spike and background,
-or any decoy; NaN = ambiguous (background-present target, or ambiguous isolate hit) -> excluded from scoring.
-Diagnostic columns (never model features): is_decoy, n_spike_reads, coverage, sample, role.
+Labels (column y): 1 = target in a spiked isolate (strict), even if the background also has reads on it
+(bg_present=1; LoD curves use bg_present=0 only); 0 = target absent from spike and background, or any decoy;
+NaN = unspiked background-present target or ambiguous isolate hit -> excluded from scoring.
+Diagnostic columns (never model features): is_decoy, bg_present, bg_reads, n_spike_reads, coverage, sample, role.
+Also writes <out dir>/null_totals.tsv: all nulls per sample incl. zero-read ones (they count in conformal n).
 
 Usage: python features.py --ref REF --work WORK --out results/pilot/features.tsv.gz
 """
@@ -110,8 +112,10 @@ def main():
 
     mask_cache = {}
     out_rows = 0
+    totals = []
     with gzip.open(a.out, "wt", newline="") as fh:
-        cols = ["sample", "role", "background", "unit", "is_decoy", "y", "coverage", "n_spike_reads"] + FEATURES
+        cols = ["sample", "role", "background", "unit", "is_decoy", "y", "coverage", "bg_present", "bg_reads",
+                "n_spike_reads"] + FEATURES
         w = csv.DictWriter(fh, cols, delimiter="\t"); w.writeheader()
         for d in tsv_read(REPO / "data_manifest/pilot_design.tsv"):
             sd = work / "samples" / d["sample"]
@@ -135,6 +139,9 @@ def main():
                 for u, st in lab[b].items():
                     if st == "strict": pos[u] = max(cov, pos.get(u, 0))
                     else: amb.add(u)
+            amb -= set(pos)   # strict in one isolate wins over ambiguous in another
+            totals.append(dict(sample=d["sample"], role=d["role"], decoy_nulls=len(seqs) - len(targets),
+                               target_nulls=len(targets - mask - set(pos) - amb)))
             for u, v in acc.items():
                 L = len(seqs[u]); n = int(v["n"])
                 depth = np.zeros(L, dtype=np.int32)
@@ -145,13 +152,14 @@ def main():
                 expected = 1 - math.exp(-md) if md > 0 else 0
                 is_decoy = u not in targets
                 if is_decoy: y = 0
-                elif u in mask: y = ""          # background-present: truth unknowable -> excluded
-                elif u in pos: y = 1
+                elif u in pos: y = 1            # spiked -> truly present, background or not
+                elif u in mask: y = ""          # unspiked background-present: truth unknowable -> excluded
                 elif u in amb: y = ""
                 else: y = 0
                 w.writerow(dict(
                     sample=d["sample"], role=d["role"], background=run, unit=u, is_decoy=int(is_decoy), y=y,
-                    coverage=pos.get(u, "") if not is_decoy else "", n_spike_reads=int(v["spike"]),
+                    coverage=pos.get(u, "") if not is_decoy else "", bg_present=int(u in mask),
+                    bg_reads=n - int(v["spike"]), n_spike_reads=int(v["spike"]),
                     n_reads=n, rpkm=round(n / (L / 1000) / (2 * total_pairs / 1e6), 4),
                     breadth1=round(b1, 4), breadth2=round(b2, 4),
                     evenness=round(b1 / expected, 4) if expected > 0 else 0,
@@ -164,14 +172,18 @@ def main():
                 out_rows += 1
             # spiked positives with zero reads: kept so TPR has the right denominator (p = 1 later)
             for u, cov in pos.items():
-                if u in acc or u in mask: continue
+                if u in acc: continue
                 row = {f: 0 for f in FEATURES}
                 row.update(sample=d["sample"], role=d["role"], background=run, unit=u, is_decoy=0, y=1,
-                           coverage=cov, n_spike_reads=0)
+                           coverage=cov, bg_present=0, bg_reads=0, n_spike_reads=0)
                 w.writerow(row); out_rows += 1
             print(d["sample"], "units with reads:", len(acc), "positives present:",
                   sum(1 for u in pos if u in acc), "/", len(pos), flush=True)
-    print("rows:", out_rows, "->", a.out)
+    tot_path = Path(a.out).parent / "null_totals.tsv"
+    with open(tot_path, "w", newline="") as fh:
+        w = csv.DictWriter(fh, ["sample", "role", "decoy_nulls", "target_nulls"], delimiter="\t")
+        w.writeheader(); w.writerows(totals)
+    print("rows:", out_rows, "->", a.out, "| null totals ->", tot_path)
 
 
 if __name__ == "__main__":

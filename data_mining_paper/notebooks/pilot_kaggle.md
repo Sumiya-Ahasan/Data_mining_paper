@@ -40,25 +40,20 @@ if not ok:
 os.environ["KMA"] = k[0]; print("KMA:", k[0]); os.system(f"{k[0]} -v")
 ```
 
-### Cell 4 — run the pilot (each step skips finished work, so re-running is safe)
+### Cell 4 — run the pilot (~45 min). Stops at the first failing step; log saved to pilot/run_log.txt
 ```python
-# Cell 4 — run the pilot (each step skips finished work, so re-running is safe)
+# Cell 4 — run the pilot (~45 min). Stops at the first failing step; log saved to pilot/run_log.txt
 A = f"--ref {REF} --bg {BG} --work /kaggle/working/pilot"
-!python src/pilot/pilot.py genomes {A}
-!python src/pilot/pilot.py label {A}
-!python src/pilot/pilot.py bgprep {A}
-!python src/pilot/pilot.py simulate {A}
-!python src/pilot/features.py --ref {REF} --work /kaggle/working/pilot --out /kaggle/working/pilot/features.tsv.gz
-!python src/pilot/gates.py --features /kaggle/working/pilot/features.tsv.gz --out /kaggle/working/pilot/gates.json
+W = "/kaggle/working/pilot"
+!mkdir -p {W} && ( python src/pilot/pilot.py genomes {A} && python src/pilot/pilot.py label {A} && python src/pilot/pilot.py bgprep {A} && python src/pilot/pilot.py simulate {A} && python src/pilot/features.py --ref {REF} --work {W} --out {W}/features.tsv.gz && python src/pilot/gates.py --features {W}/features.tsv.gz --out {W}/gates.json && echo "PILOT FINISHED OK" ) 2>&1 | tee {W}/run_log.txt
 ```
 
-### Cell 5 — pack the small results for Claude
+### Cell 5 — pack ONLY the small results for Claude (download this one file, not the whole folder)
 ```python
-# Cell 5 — pack the small results for Claude
-!cd /kaggle/working/pilot && tar czf /kaggle/working/pilot_results.tgz gates.json features.tsv.gz labels/isolate_args.tsv bg/*.log bg/*.res samples/*/spike_pairs.txt samples/*/sample.res samples/*/spike.bam.log
-!ls -la /kaggle/working/pilot_results.tgz
+# Cell 5 — pack ONLY the small results for Claude (download this one file, not the whole folder)
+!cd /kaggle/working/pilot && tar czf /kaggle/working/pilot_results.tgz run_log.txt gates.json features.tsv.gz null_totals.tsv labels/isolate_args.tsv bg/*.log bg/*.res samples/*/spike_pairs.txt samples/*/sample.res samples/*/spike.bam.log 2>/dev/null; ls -la /kaggle/working/pilot_results.tgz
 ```
-Download **`pilot_results.tgz`** (Output tab) and send it to Claude. Large files (BAMs, FASTQs) stay on Kaggle.
+Download only **`pilot_results.tgz`** (~0.7 MB; Output tab → that file's ⋮ → Download) and send it to Claude. Do not use "Download all" — that zips the whole 3 GB working folder. Large files (BAMs, FASTQs) stay on Kaggle.
 
 ### If something fails
 Copy the last ~30 lines of the failing cell's output to Claude. Common fixes: wrong REF/BG path (Cell 1), `art_illumina` missing (apt package name), KMA flag differences (`kma -h`).
