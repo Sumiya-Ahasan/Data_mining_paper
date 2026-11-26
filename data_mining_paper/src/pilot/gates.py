@@ -9,7 +9,8 @@ G2 decoys: validity needs decoy null scores to be at least as heavy-tailed as ta
            pass = no fail and >= 5 target-null events expected at the 99% decoy threshold under equal
            rates (enough power); else inconclusive. Lists the top target-null hits (check for label misses).
            Score = logistic P(positive), cross-fitted by role (each role scored by a model fit on the others).
-           The two-sided C2ST AUC (hits only) is kept as a diagnostic.
+           The two-sided C2ST AUC (hits only) is kept as a diagnostic. With decoy v2 the same test is
+           repeated per decoy type (by_decoy_type: U, N, M and N+M together).
 G3 shift:  classifier two-sample test, cal vs test decoy hits (pass: AUC > 0.60) + indicative n_eff.
 Also prints label counts and where null reads come from (background vs spike).
 
@@ -107,20 +108,34 @@ def main():
         E = hit[hit.role == te]; sc[E.index] = mdl.predict_proba(E[FEATURES].values)[:, 1]
     tn_s = sc[(hit.y == 0) & (hit.is_decoy == 0)].dropna(); dn_s = sc[hit.is_decoy == 1].dropna()
     TN, DN = int(tot.target_nulls.sum()), int(tot.decoy_nulls.sum())
-    tails, worst_p = [], 1.0
-    if len(dn_s):
-        for qq in (0.5, 0.9, 0.99, 0.999):
-            t = float(dn_s.quantile(qq)); a_ = int((tn_s >= t).sum()); b_ = int((dn_s >= t).sum())
-            pv = float(fisher_exact([[a_, TN - a_], [b_, DN - b_]], alternative="greater")[1])
+
+    def tail_test(d_s, D):
+        tails, worst_p = [], 1.0
+        for qq in (0.5, 0.9, 0.99, 0.999) if len(d_s) else ():
+            t = float(d_s.quantile(qq)); a_ = int((tn_s >= t).sum()); b_ = int((d_s >= t).sum())
+            pv = float(fisher_exact([[a_, TN - a_], [b_, D - b_]], alternative="greater")[1])
             worst_p = min(worst_p, pv)
             tails.append({"decoy_quantile": qq, "threshold": round(t, 4), "target_null_events": a_,
-                          "decoy_events": b_, "expected_target_null_events_if_equal": round(b_ / DN * TN, 2),
+                          "decoy_events": b_, "expected_target_null_events_if_equal": round(b_ / D * TN, 2),
                           "target_null_rate_per10k": round(1e4 * a_ / TN, 2),
-                          "decoy_rate_per10k": round(1e4 * b_ / DN, 2), "fisher_p_greater": round(pv, 4)})
+                          "decoy_rate_per10k": round(1e4 * b_ / D, 2), "fisher_p_greater": round(pv, 4)})
+        # pass needs power in the tail: >= 5 target-null events expected at the 99% decoy threshold if equal rates
+        powered = len(tails) > 2 and tails[2]["expected_target_null_events_if_equal"] >= 5
+        return tails, ("fail" if worst_p < 0.05 else ("pass" if powered else "inconclusive"))
+
+    tails, g2["verdict"] = tail_test(dn_s, DN)
     g2.update(tails=tails, n_target_nulls_all=TN, n_decoy_nulls_all=DN)
-    # pass needs power in the tail: >= 5 target-null events expected at the 99% decoy threshold if rates were equal
-    powered = len(tails) > 2 and tails[2]["expected_target_null_events_if_equal"] >= 5
-    g2["verdict"] = "fail" if worst_p < 0.05 else ("pass" if powered else "inconclusive")
+    # decoy v2: same test per decoy type (U uniform, N near, M mosaic) and for N+M together
+    if "decoy_type" in hit and hit.decoy_type.notna().any():
+        dt = hit.decoy_type.reindex(dn_s.index)
+        groups = {t: [t] for t in sorted(dt.dropna().unique())}
+        if len(groups) > 1 and set(groups) - {"U"}: groups["NM"] = sorted(set(groups) - {"U"})
+        g2["by_decoy_type"] = {}
+        for name, ts in groups.items():
+            D = int(sum(tot[f"decoy_nulls_{t}"].sum() for t in ts if f"decoy_nulls_{t}" in tot))
+            if not D: continue
+            tl, vd = tail_test(dn_s[dt.isin(ts)], D)
+            g2["by_decoy_type"][name] = {"verdict": vd, "n_decoy_nulls_all": D, "tails": tl}
     top = hit.loc[tn_s.sort_values(ascending=False).index[:15]]
     g2["top_target_nulls"] = [dict(sample=r["sample"], unit=r["unit"], score=round(float(tn_s[i]), 4),
                                    n_reads=int(r["n_reads"]), mean_identity=float(r["mean_identity"]))

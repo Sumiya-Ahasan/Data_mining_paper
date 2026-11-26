@@ -6,7 +6,8 @@ with >= 1 primary Bowtie2 alignment in (background BAM + spike BAM); all other u
 
 Labels (column y): 1 = target in a spiked isolate (strict), even if the background also has reads on it
 (bg_present=1; LoD curves use bg_present=0 only); 0 = target absent from spike and background, or any decoy;
-NaN = unspiked background-present target or ambiguous isolate hit -> excluded from scoring.
+NaN = unspiked background-present target or isolate fragment hit (label v2) -> excluded from scoring.
+decoy_type = U/N/M for decoy v2 (make_decoys_v2.py); null_totals.tsv also has decoy_nulls_<type>.
 Diagnostic columns (never model features): is_decoy, bg_present, bg_reads, n_spike_reads, coverage, sample, role.
 Also writes <out dir>/null_totals.tsv: all nulls per sample incl. zero-read ones (they count in conformal n).
 
@@ -89,6 +90,12 @@ def kma_res(path):
     return out
 
 
+def decoy_type(u):
+    """DECOY|<type><k>|<target>: v2 types U/N/M (make_decoys_v2.py); v1 ids DECOY|<k>|... count as U."""
+    f = u.split("|")
+    return f[1][0] if len(f) > 1 and f[1][:1].isalpha() else "U"
+
+
 def tsv_read(path):
     return list(csv.DictReader(open(path, encoding="utf-8"), delimiter="\t"))
 
@@ -107,6 +114,8 @@ def main():
     seqs = read_fasta(ref / "card90_decoys.fasta")
     ref_gc = {k: gc(v) for k, v in seqs.items()}
     targets = set(read_fasta(ref / "card90.fasta"))
+    dtypes = sorted({decoy_type(u) for u in seqs if u not in targets})
+    n_dtype = {t: sum(1 for u in seqs if u not in targets and decoy_type(u) == t) for t in dtypes}
 
     lab = defaultdict(dict)   # biosample -> unit -> status
     for r in tsv_read(work / "labels/isolate_args.tsv"):
@@ -116,8 +125,8 @@ def main():
     out_rows = 0
     totals = []
     with gzip.open(a.out, "wt", newline="") as fh:
-        cols = ["sample", "role", "background", "unit", "is_decoy", "y", "coverage", "bg_present", "bg_reads",
-                "n_spike_reads"] + FEATURES
+        cols = ["sample", "role", "background", "unit", "is_decoy", "decoy_type", "y", "coverage", "bg_present",
+                "bg_reads", "n_spike_reads"] + FEATURES
         w = csv.DictWriter(fh, cols, delimiter="\t"); w.writeheader()
         for d in tsv_read(Path(a.design)):
             sd = work / "samples" / d["sample"]
@@ -147,7 +156,8 @@ def main():
                     else: amb.add(u)
             amb -= set(pos)   # strict in one isolate wins over ambiguous in another
             totals.append(dict(sample=d["sample"], role=d["role"], decoy_nulls=len(seqs) - len(targets),
-                               target_nulls=len(targets - mask - set(pos) - amb)))
+                               target_nulls=len(targets - mask - set(pos) - amb),
+                               **{f"decoy_nulls_{t}": n for t, n in n_dtype.items()}))
             for u, v in acc.items():
                 L = len(seqs[u]); n = int(v["n"])
                 depth = np.zeros(L, dtype=np.int32)
@@ -164,6 +174,7 @@ def main():
                 else: y = 0
                 w.writerow(dict(
                     sample=d["sample"], role=d["role"], background=run, unit=u, is_decoy=int(is_decoy), y=y,
+                decoy_type=decoy_type(u) if is_decoy else "",
                     coverage=pos.get(u, "") if not is_decoy else "", bg_present=int(u in mask),
                     bg_reads=n - int(v["spike"]), n_spike_reads=int(v["spike"]),
                     n_reads=n, rpkm=round(n / (L / 1000) / (2 * total_pairs / 1e6), 4),
@@ -187,7 +198,8 @@ def main():
                   sum(1 for u in pos if u in acc), "/", len(pos), flush=True)
     tot_path = Path(a.out).parent / "null_totals.tsv"
     with open(tot_path, "w", newline="") as fh:
-        w = csv.DictWriter(fh, ["sample", "role", "decoy_nulls", "target_nulls"], delimiter="\t")
+        w = csv.DictWriter(fh, ["sample", "role", "decoy_nulls", "target_nulls"] + [f"decoy_nulls_{t}" for t in dtypes],
+                           delimiter="\t")
         w.writeheader(); w.writerows(totals)
     print("rows:", out_rows, "->", a.out, "| null totals ->", tot_path)
 

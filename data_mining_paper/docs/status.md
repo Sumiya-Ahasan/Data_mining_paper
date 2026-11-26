@@ -39,5 +39,5 @@ Legend: [x] done · [ ] todo · (YOU) = manual step for the researcher · (C) = 
 - [x] (C) Write G2 extension: 174 isolates alone at 10x, no background (notebooks/g2ext_kaggle.md, data_manifest/g2ext_design.tsv)
 - [x] (YOU) Run G2 extension on Kaggle (dm_g2ext, 174/174 genomes, finished OK)
 - [x] (C) Check G2 extension: G2 FAIL (well powered) → label gaps (fragments, split HSPs) + real homologs with conserved blocks; results/g2ext/
-- [ ] (C) Decoy v2 (mosaic + near decoys) + label v2 (HSP sum, fragment class, all cluster members); rebuild reference
-- [ ] (YOU) Re-run G2 test with decoy v2 (reuse dm_g2ext output as input)
+- [x] (C) Decoy v2 (U/N/M types, 150-bp window cap) + label v2 (merged HSPs, fragment class, all cluster members) + per-type G2; tested locally (src/make_decoys_v2.py, filter_decoys.py, window_id.py, build_reference_v2.sh)
+- [ ] (YOU) Run G2 test v2 on Kaggle (notebooks/g2v2_kaggle.md; inputs card90-decoys-ref + dm_g2ext output); send g2v2_results.tgz

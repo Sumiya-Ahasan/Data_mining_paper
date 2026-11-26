@@ -6,7 +6,7 @@ Subcommands (run in order; each skips work already done):
   split     -> data_manifest/isolate_split.tsv           (local or Kaggle)
   design    -> data_manifest/pilot_design.tsv            (local or Kaggle)
   genomes   -> $WORK/genomes/<biosample>.fna             (Kaggle, internet ON)
-  label     -> $WORK/labels/isolate_args.tsv             (Kaggle; BLAST of CARD homologs vs genomes)
+  label     -> $WORK/labels/isolate_args.tsv             (Kaggle; BLAST of CARD homologs vs genomes; label v2)
   bgprep    -> $WORK/bg/<run>_{1,2}.150.fq.gz, bg.bam, kma .res, mask   (Kaggle)
   simulate  -> $WORK/samples/<sample>/spike.bam, sample.res              (Kaggle)
   g2design  -> data_manifest/g2ext_design.tsv: every isolate alone, no background (G2 extension)
@@ -20,6 +20,8 @@ import argparse, csv, gzip, os, random, re, shutil, subprocess, sys, urllib.requ
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO / "src"))
+from window_id import max_window_identity, classify  # noqa: E402
 LADDER = [0.1, 0.25, 0.5, 1, 2, 5, 10]
 # Approved 2026-11-25 (decision_log): genus-level split
 SPLIT = {
@@ -145,8 +147,10 @@ def cluster_map(clstr):
 
 
 def cmd_label(a):
-    """Y=1 ('strict'): a CARD homolog member hits the genome at >=90% id over >=80% of its length.
-    'ambiguous': best hit >=70% id over >=50% length but not strict (excluded from scoring)."""
+    """Label v2 (2026-11-26, src/window_id.py): per CARD unit (card_90 representative) and genome, over ALL
+    cluster members: 'strict' (y=1) = HSPs at >=90% id on one contig cover >=80% of the member;
+    'fragment' (excluded) = not strict but some HSP has a 150-column window at >=90% identity.
+    Everything else is a null, distant homologs included (v1's 70%/50% 'ambiguous' class hid those)."""
     ref = Path(a.ref); work = Path(a.work)
     cmap = cluster_map(ref / "card90.fasta.clstr")
     homolog = ref / "card/nucleotide_fasta_protein_homolog_model.fasta"
@@ -156,26 +160,41 @@ def cmd_label(a):
         g = work / "genomes" / f"{b}.fna"
         if not g.exists():
             print("no genome, skip", b); continue
-        hits = out / f"{b}.blast.tsv"
-        if not hits.exists():
+        summ = out / f"{b}.hsp2.tsv"    # one line per HSP, alignment strings reduced to the max window identity
+        if not summ.exists():
+            raw = out / f"{b}.blast2.raw"
             sh(f"makeblastdb -in {g} -dbtype nucl -out {out}/{b}.db > /dev/null")
             sh(f"blastn -task dc-megablast -query {homolog} -db {out}/{b}.db -evalue 1e-10 "
                f"-max_target_seqs 5 -num_threads {a.threads} "
-               f"-outfmt '6 qseqid sseqid pident length qlen slen evalue bitscore' > {hits}")
-        best = {}  # rep -> (status_rank, pident, qcov)
-        for line in open(hits):
-            q, s, pid, L, qlen, *_ = line.split("\t")
-            pid, cov = float(pid), int(L) / int(qlen)
+               f"-outfmt '6 qseqid sseqid pident length qlen qstart qend qseq sseq' > {raw}")
+            with open(raw) as fi, open(str(summ) + ".tmp", "w") as fo:
+                for line in fi:
+                    q, s_, pid, L, qlen, qs, qe, qseq, sseq = line.rstrip("\n").split("\t")
+                    mw = max_window_identity(qseq, sseq)
+                    fo.write("\t".join([q, s_, pid, L, qlen, qs, qe, "" if mw is None else f"{mw:.4f}"]) + "\n")
+            os.replace(str(summ) + ".tmp", summ); raw.unlink()
+            for f in out.glob(f"{b}.db.*"): f.unlink()
+        hs = {}
+        for line in open(summ):
+            q, s_, pid, L, qlen, qs, qe, mw = line.rstrip("\n").split("\t")
+            hs.setdefault(q, []).append(dict(sseqid=s_, pident=float(pid), qlen=int(qlen), qstart=int(qs),
+                                             qend=int(qe), maxwin=float(mw) if mw else None))
+        best = {}  # rep -> (rank, cov90, maxwin, member)
+        for q, h in hs.items():
             rep = cmap.get(q)
             if rep is None:
                 continue
-            st = 2 if (pid >= 90 and cov >= 0.8) else (1 if (pid >= 70 and cov >= 0.5) else 0)
-            if st and (rep not in best or (st, pid) > best[rep][:2]):
-                best[rep] = (st, pid, round(cov, 3))
-        for rep, (st, pid, cov) in best.items():
-            rows.append(dict(biosample=b, unit=rep, status="strict" if st == 2 else "ambiguous", pident=pid, qcov=cov))
-        print(b, "strict:", sum(v[0] == 2 for v in best.values()), "ambiguous:", sum(v[0] == 1 for v in best.values()), flush=True)
-    tsv_write(out / "isolate_args.tsv", rows, ["biosample", "unit", "status", "pident", "qcov"])
+            st, cov, mw = classify(h)
+            if st is None: continue
+            rank = 2 if st == "strict" else 1
+            if rep not in best or (rank, cov, mw) > best[rep][:3]:
+                best[rep] = (rank, cov, mw, q)
+        for rep, (rank, cov, mw, q) in best.items():
+            rows.append(dict(biosample=b, unit=rep, status="strict" if rank == 2 else "fragment",
+                             qcov90=cov, max_window_identity=mw, member=q))
+        print(b, "strict:", sum(v[0] == 2 for v in best.values()), "fragment:", sum(v[0] == 1 for v in best.values()),
+              flush=True)
+    tsv_write(out / "isolate_args.tsv", rows, ["biosample", "unit", "status", "qcov90", "max_window_identity", "member"])
 
 
 # ---------------------------------------------------------------- background prep
