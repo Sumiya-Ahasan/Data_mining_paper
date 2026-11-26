@@ -37,4 +37,7 @@ Legend: [x] done · [ ] todo · (YOU) = manual step for the researcher · (C) = 
 - [x] (C) Check pilot: G1 pass (after fix), G2 inconclusive, G3 pass → results/pilot/gates_v1_relabelled.json
 - [x] (C) Fix labels (spiked = positive even if background has reads) + G1 count + one-sided G2 + n_eff
 - [x] (C) Write G2 extension: 174 isolates alone at 10x, no background (notebooks/g2ext_kaggle.md, data_manifest/g2ext_design.tsv)
-- [ ] (YOU) Run G2 extension on Kaggle (new notebook dm_g2ext, input card90-decoys-ref only); send g2ext_results.tgz
+- [x] (YOU) Run G2 extension on Kaggle (dm_g2ext, 174/174 genomes, finished OK)
+- [x] (C) Check G2 extension: G2 FAIL (well powered) → label gaps (fragments, split HSPs) + real homologs with conserved blocks; results/g2ext/
+- [ ] (C) Decoy v2 (mosaic + near decoys) + label v2 (HSP sum, fragment class, all cluster members); rebuild reference
+- [ ] (YOU) Re-run G2 test with decoy v2 (reuse dm_g2ext output as input)
