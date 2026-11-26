@@ -1,7 +1,7 @@
-run_accession	study_accession	instrument_model	library_layout	read_count	base_count	sample_title	sample_alias	country	isolation_source	first_public	fastq_bytes
-ERR1713349	PRJEB13831	Illumina HiSeq 3000	PAIRED	52784111	15940801522	wastewater metagenome	DNK.71_RA	Denmark		2019-01-31	5043560841;5157236674
-ERR1713397	PRJEB13831	Illumina HiSeq 3000	PAIRED	44621047	13475556194	wastewater metagenome	USA.74	USA		2019-01-31	3815973499;4244076708
-ERR1713384	PRJEB13831	Illumina HiSeq 3000	PAIRED	53259350	16084323700	wastewater metagenome	PAK.7	Pakistan		2019-01-31	4481838094;5043030519
-ERR1713346	PRJEB13831	Illumina HiSeq 3000	PAIRED	28198167	8515846434	wastewater metagenome	COL.2	Colombia		2019-01-31	2387600353;2686449394
-ERR1713386	PRJEB13831	Illumina HiSeq 3000	PAIRED	64613393	19513244686	wastewater metagenome	SEN.8	Senegal		2019-01-31	5396105388;5966759462
-ERR1713347	PRJEB13831	Illumina HiSeq 3000	PAIRED	37949844	11460852888	wastewater metagenome	CZE.23	Czech Republic		2019-01-31	3219222162;3667641751
+run_accession	study_accession	instrument_model	library_layout	read_count	base_count	sample_title	sample_alias	country	isolation_source	first_public	fastq_bytes	fastq_ftp
+ERR1713349	PRJEB13831	Illumina HiSeq 3000	PAIRED	52784111	15940801522	wastewater metagenome	DNK.71_RA	Denmark		2019-01-31	5043560841;5157236674	ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/009/ERR1713349/ERR1713349_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/009/ERR1713349/ERR1713349_2.fastq.gz
+ERR1713397	PRJEB13831	Illumina HiSeq 3000	PAIRED	44621047	13475556194	wastewater metagenome	USA.74	USA		2019-01-31	3815973499;4244076708	ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/007/ERR1713397/ERR1713397_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/007/ERR1713397/ERR1713397_2.fastq.gz
+ERR1713384	PRJEB13831	Illumina HiSeq 3000	PAIRED	53259350	16084323700	wastewater metagenome	PAK.7	Pakistan		2019-01-31	4481838094;5043030519	ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/004/ERR1713384/ERR1713384_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/004/ERR1713384/ERR1713384_2.fastq.gz
+ERR1713346	PRJEB13831	Illumina HiSeq 3000	PAIRED	28198167	8515846434	wastewater metagenome	COL.2	Colombia		2019-01-31	2387600353;2686449394	ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/006/ERR1713346/ERR1713346_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/006/ERR1713346/ERR1713346_2.fastq.gz
+ERR1713386	PRJEB13831	Illumina HiSeq 3000	PAIRED	64613393	19513244686	wastewater metagenome	SEN.8	Senegal		2019-01-31	5396105388;5966759462	ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/006/ERR1713386/ERR1713386_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/006/ERR1713386/ERR1713386_2.fastq.gz
+ERR1713347	PRJEB13831	Illumina HiSeq 3000	PAIRED	37949844	11460852888	wastewater metagenome	CZE.23	Czech Republic		2019-01-31	3219222162;3667641751	ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/007/ERR1713347/ERR1713347_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/ERR171/007/ERR1713347/ERR1713347_2.fastq.gz

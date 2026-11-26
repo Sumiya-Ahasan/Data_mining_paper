@@ -14,12 +14,22 @@ command -v seqtk >/dev/null || { $SUDO apt-get -qq update && $SUDO apt-get -qq i
 
 lines() { zcat "$1" 2>/dev/null | wc -l; }
 
-tail -n +2 "$MAN" | cut -f1,5 | while read -r RUN NREADS; do
+# columns: run (1), read_count (5), fastq_ftp (by header name, optional) -> "RUN NREADS URLS"
+awk -F'\t' 'NR==1{for(i=1;i<=NF;i++) if($i=="fastq_ftp") c=i; next} {print $1, $5, (c ? $c : "")}' "$MAN" |
+while read -r RUN NREADS URLS; do
   O1="$OUT/${RUN}_1.fastq.gz"; O2="$OUT/${RUN}_2.fastq.gz"
   if [ -s "$O1" ] && [ "$(lines "$O1")" -eq $((4*N)) ] && [ "$(lines "$O2")" -eq $((4*N)) ]; then
     echo "skip $RUN (complete)"; continue; fi
-  URLS=$(curl -s "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=$RUN&result=read_run&fields=fastq_ftp" | tail -1 | cut -f2)
+  # download links: from the manifest if present, else ask ENA (retry; the API can return nothing)
+  for t in 1 2 3 4 5; do
+    [ -n "$URLS" ] && break
+    URLS=$(curl -s --retry 3 "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=$RUN&result=read_run&fields=fastq_ftp" \
+           | awk -F'\t' 'NR==2{print $2}')
+    [ -z "$URLS" ] && { echo "  ENA lookup empty for $RUN (try $t), waiting"; sleep 20; }
+  done
+  [ -z "$URLS" ] && { echo "  NO DOWNLOAD LINK for $RUN — skipping"; continue; }
   U1=$(echo "$URLS" | cut -d';' -f1); U2=$(echo "$URLS" | cut -d';' -f2)
+  echo "$RUN links: $U1 ; $U2"
 
   for attempt in 1 2 3; do
     if [ "$HP" -gt 0 ] && [ "$HP" -lt "$NREADS" ]; then

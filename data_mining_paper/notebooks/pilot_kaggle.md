@@ -5,12 +5,14 @@
 
 ### Cell 1 — find dataset paths (check once, then edit REF/BG below)
 ```python
+# Cell 1 — find dataset paths (check once, then edit REF/BG below)
 !ls /kaggle/input/
-!find /kaggle/input -maxdepth 3 -name "card90_decoys.fasta" -o -maxdepth 3 -name "ERR1713384_1.fastq*"
+!find /kaggle/input -maxdepth 6 \( -name "card90_decoys.fasta" -o -name "ERR1713384_1.fastq*" \)
 ```
 
 ### Cell 2 — code + tools
 ```python
+# Cell 2 — code + tools
 from kaggle_secrets import UserSecretsClient
 tok = UserSecretsClient().get_secret("GITHUB_TOKEN")
 !rm -rf /kaggle/working/repo && git clone -q https://{tok}@github.com/Sumiya-Ahasan/Data_mining_paper.git /kaggle/working/repo
@@ -22,9 +24,10 @@ tok = UserSecretsClient().get_secret("GITHUB_TOKEN")
 
 ### Cell 3 — KMA (reuse from the reference dataset if present, else build)
 ```python
+# Cell 3 — KMA (reuse from the reference dataset if present, else build)
 import os, glob
-REF = "/kaggle/input/card90-decoys-ref/ref"        # <- edit if Cell 1 shows a different path
-BG  = "/kaggle/input/ww-bg-5m/bg"          # <- edit if Cell 1 shows a different path
+REF = "/kaggle/input/datasets/sumiyaahasan/card90-decoys-ref/ref"   # path found by Cell 1
+BG  = "/kaggle/input/datasets/sumiyaahasan/ww-backgrounds-5m/bg"     # path found by Cell 1
 k = glob.glob("/kaggle/input/**/kma/kma", recursive=True)
 ok = False
 if k:  # dataset files can lose the executable bit -> copy + chmod, then test
@@ -39,6 +42,7 @@ os.environ["KMA"] = k[0]; print("KMA:", k[0]); os.system(f"{k[0]} -v")
 
 ### Cell 4 — run the pilot (each step skips finished work, so re-running is safe)
 ```python
+# Cell 4 — run the pilot (each step skips finished work, so re-running is safe)
 A = f"--ref {REF} --bg {BG} --work /kaggle/working/pilot"
 !python src/pilot/pilot.py genomes {A}
 !python src/pilot/pilot.py label {A}
@@ -50,6 +54,7 @@ A = f"--ref {REF} --bg {BG} --work /kaggle/working/pilot"
 
 ### Cell 5 — pack the small results for Claude
 ```python
+# Cell 5 — pack the small results for Claude
 !cd /kaggle/working/pilot && tar czf /kaggle/working/pilot_results.tgz gates.json features.tsv.gz labels/isolate_args.tsv bg/*.log bg/*.res samples/*/spike_pairs.txt samples/*/sample.res samples/*/spike.bam.log
 !ls -la /kaggle/working/pilot_results.tgz
 ```
