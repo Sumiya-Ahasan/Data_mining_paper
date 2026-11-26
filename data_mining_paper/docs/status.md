@@ -36,5 +36,5 @@ Legend: [x] done · [ ] todo · (YOU) = manual step for the researcher · (C) = 
 - [x] (YOU) Run pilot on Kaggle (dm_main v2, 2026-11-26, ~46 min, PILOT FINISHED OK)
 - [x] (C) Check pilot: G1 pass (after fix), G2 inconclusive, G3 pass → results/pilot/gates_v1_relabelled.json
 - [x] (C) Fix labels (spiked = positive even if background has reads) + G1 count + one-sided G2 + n_eff
-- [ ] (C) Write G2 extension: isolate-only (no background) runs on many isolates → enough target-null tail events
-- [ ] (YOU) Run G2 extension on Kaggle when ready
+- [x] (C) Write G2 extension: 174 isolates alone at 10x, no background (notebooks/g2ext_kaggle.md, data_manifest/g2ext_design.tsv)
+- [ ] (YOU) Run G2 extension on Kaggle (new notebook dm_g2ext, input card90-decoys-ref only); send g2ext_results.tgz

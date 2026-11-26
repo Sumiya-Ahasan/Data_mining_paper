@@ -9,6 +9,10 @@ Subcommands (run in order; each skips work already done):
   label     -> $WORK/labels/isolate_args.tsv             (Kaggle; BLAST of CARD homologs vs genomes)
   bgprep    -> $WORK/bg/<run>_{1,2}.150.fq.gz, bg.bam, kma .res, mask   (Kaggle)
   simulate  -> $WORK/samples/<sample>/spike.bam, sample.res              (Kaggle)
+  g2design  -> data_manifest/g2ext_design.tsv: every isolate alone, no background (G2 extension)
+
+--design picks the design file (default pilot_design.tsv); genomes/label/simulate use its isolates.
+A design row with background "none" = isolate reads only (truth fully known; used for G2).
 
 Paths come from flags (defaults suit Kaggle; see notebooks/pilot_kaggle.md).
 """
@@ -76,9 +80,20 @@ def cmd_design(a):
     print(f"{len(rows)} pilot samples -> data_manifest/pilot_design.tsv")
 
 
-def design_isolates():
-    d = tsv_read(REPO / "data_manifest/pilot_design.tsv")
-    return sorted({r[f"iso{j}"] for r in d for j in (1, 2, 3)})
+def cmd_g2design(a):
+    """G2 extension: each of the 174 isolates simulated alone at --cov, no background."""
+    iso = tsv_read(REPO / "data_manifest/isolate_split.tsv")
+    rows = [dict(sample=f"g2x_{r['biosample']}", background="none", role=r["split"], iso1=r["biosample"],
+                 cov1=a.cov, iso2="", cov2="", iso3="", cov3="", art_seed=a.seed * 1000 + 500 + i)
+            for i, r in enumerate(iso)]
+    cols = ["sample", "background", "role", "iso1", "cov1", "iso2", "cov2", "iso3", "cov3", "art_seed"]
+    tsv_write(REPO / "data_manifest/g2ext_design.tsv", rows, cols)
+    print(len(rows), "samples -> data_manifest/g2ext_design.tsv")
+
+
+def design_isolates(design):
+    d = tsv_read(Path(design))
+    return sorted({r[f"iso{j}"] for r in d for j in (1, 2, 3) if r.get(f"iso{j}")})
 
 
 # ---------------------------------------------------------------- genomes
@@ -91,17 +106,25 @@ def ncbi_url(asm):
 
 def cmd_genomes(a):
     iso = {r["biosample"]: r for r in tsv_read(REPO / "data_manifest/isolate_split.tsv")}
-    want = sorted(iso) if a.all else design_isolates()
+    want = sorted(iso) if a.all else design_isolates(a.design)
     out = Path(a.work) / "genomes"; out.mkdir(parents=True, exist_ok=True)
+    failed = []
     for b in want:
         f = out / f"{b}.fna"
         if f.exists() and f.stat().st_size > 0:
             continue
         url = ncbi_url(iso[b]["assembly"])
         print("get", b, url, flush=True)
-        with urllib.request.urlopen(url, timeout=120) as r, open(f, "wb") as w:
-            w.write(gzip.decompress(r.read()))
-    print(len(want), "genomes in", out)
+        for t in range(3):
+            try:
+                with urllib.request.urlopen(url, timeout=120) as r:
+                    data = gzip.decompress(r.read())
+                f.write_bytes(data); break
+            except Exception as e:
+                print("  retry", t + 1, b, e, flush=True)
+        else:
+            failed.append(b)
+    print(len(want) - len(failed), "genomes in", out, "| FAILED:", failed or "none")
 
 
 # ---------------------------------------------------------------- ARG labels per isolate
@@ -129,8 +152,10 @@ def cmd_label(a):
     homolog = ref / "card/nucleotide_fasta_protein_homolog_model.fasta"
     out = work / "labels"; out.mkdir(parents=True, exist_ok=True)
     rows = []
-    for b in design_isolates() if not a.all else sorted(p.stem for p in (work / "genomes").glob("*.fna")):
+    for b in design_isolates(a.design) if not a.all else sorted(p.stem for p in (work / "genomes").glob("*.fna")):
         g = work / "genomes" / f"{b}.fna"
+        if not g.exists():
+            print("no genome, skip", b); continue
         hits = out / f"{b}.blast.tsv"
         if not hits.exists():
             sh(f"makeblastdb -in {g} -dbtype nucl -out {out}/{b}.db > /dev/null")
@@ -192,16 +217,18 @@ def cmd_bgprep(a):
 # ---------------------------------------------------------------- spike simulation + alignment
 def cmd_simulate(a):
     ref, work = Path(a.ref), Path(a.work)
-    for r in tsv_read(REPO / "data_manifest/pilot_design.tsv"):
+    for r in tsv_read(Path(a.design)):
         if a.only and r["sample"] not in a.only.split(","):
             continue
+        isos = [(r[f"iso{j}"], r[f"cov{j}"]) for j in (1, 2, 3) if r.get(f"iso{j}")]
+        if any(not (work / "genomes" / f"{b}.fna").exists() for b, _ in isos):
+            print("missing genome, skip", r["sample"]); continue
         sd = work / "samples" / r["sample"]; sd.mkdir(parents=True, exist_ok=True)
         if (sd / "sample.res").exists() and (sd / "spike.bam").exists():
             print("skip", r["sample"]); continue
         for f in ("spike_1.fq.gz", "spike_2.fq.gz"):
             (sd / f).unlink(missing_ok=True)
-        for j in (1, 2, 3):
-            b, cov = r[f"iso{j}"], r[f"cov{j}"]
+        for j, (b, cov) in enumerate(isos, 1):
             pre = sd / f"art_{b}"
             sh(f"art_illumina -ss HS25 -i {work}/genomes/{b}.fna -p -l {READ_LEN} -f {cov} -m 300 -s 30 "
                f"-rs {int(r['art_seed']) + j} -na -o {pre} > {pre}.log 2>&1")
@@ -211,20 +238,25 @@ def cmd_simulate(a):
                 os.remove(f"{pre}{m}.fq")
         bt2(sd / "spike_1.fq.gz", sd / "spike_2.fq.gz", ref / "idx/card90d", sd / "spike.bam", a.threads)
         bg = work / "bg"; run = r["background"]
-        for m in (1, 2):   # full sample = trimmed background + spike (gzip members concatenate)
-            sh(f"cat {bg}/{run}_{m}.150.fq.gz {sd}/spike_{m}.fq.gz > {sd}/full_{m}.fq.gz")
-        kma(sd / "full_1.fq.gz", sd / "full_2.fq.gz", ref / "idx/card90d", sd / "sample", a.threads)
+        if run == "none":   # isolate reads only
+            kma(sd / "spike_1.fq.gz", sd / "spike_2.fq.gz", ref / "idx/card90d", sd / "sample", a.threads)
+        else:
+            for m in (1, 2):   # full sample = trimmed background + spike (gzip members concatenate)
+                sh(f"cat {bg}/{run}_{m}.150.fq.gz {sd}/spike_{m}.fq.gz > {sd}/full_{m}.fq.gz")
+            kma(sd / "full_1.fq.gz", sd / "full_2.fq.gz", ref / "idx/card90d", sd / "sample", a.threads)
         n = int(subprocess.run(f"zcat {sd}/spike_1.fq.gz | wc -l", shell=True, capture_output=True,
                                text=True, executable="/bin/bash").stdout) // 4
         (sd / "spike_pairs.txt").write_text(str(n))
-        for m in (1, 2):
-            (sd / f"full_{m}.fq.gz").unlink()
+        for f in ("full_1.fq.gz", "full_2.fq.gz", "spike_1.fq.gz", "spike_2.fq.gz"):   # BAM + .res are kept
+            (sd / f).unlink(missing_ok=True)
         print(r["sample"], "spike pairs:", n, flush=True)
 
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("cmd", choices=["split", "design", "genomes", "label", "bgprep", "simulate"])
+    p.add_argument("cmd", choices=["split", "design", "genomes", "label", "bgprep", "simulate", "g2design"])
+    p.add_argument("--design", default=str(REPO / "data_manifest/pilot_design.tsv"))
+    p.add_argument("--cov", type=float, default=10, help="g2design: coverage per isolate")
     p.add_argument("--ref", default="/kaggle/input/card90-decoys-ref/ref")
     p.add_argument("--bg", default="/kaggle/input/ww-bg-5m/bg")
     p.add_argument("--work", default="/kaggle/working/pilot")

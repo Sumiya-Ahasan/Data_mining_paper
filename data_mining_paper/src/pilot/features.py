@@ -98,6 +98,8 @@ def main():
     p.add_argument("--ref", default="/kaggle/input/card90-decoys-ref/ref")
     p.add_argument("--work", default="/kaggle/working/pilot")
     p.add_argument("--bg_pairs", type=int, default=5_000_000)
+    p.add_argument("--design", default=str(REPO / "data_manifest/pilot_design.tsv"),
+                   help="background 'none' rows = isolate reads only (no mask, no background BAM)")
     p.add_argument("--out", default="/kaggle/working/pilot/features.tsv.gz")
     a = p.parse_args()
     ref, work = Path(a.ref), Path(a.work)
@@ -117,24 +119,28 @@ def main():
         cols = ["sample", "role", "background", "unit", "is_decoy", "y", "coverage", "bg_present", "bg_reads",
                 "n_spike_reads"] + FEATURES
         w = csv.DictWriter(fh, cols, delimiter="\t"); w.writeheader()
-        for d in tsv_read(REPO / "data_manifest/pilot_design.tsv"):
+        for d in tsv_read(Path(a.design)):
             sd = work / "samples" / d["sample"]
             if not (sd / "spike.bam").exists():
                 print("missing", d["sample"], file=sys.stderr); continue
             run = d["background"]
+            if run == "none":
+                mask_cache[run] = set()
             if run not in mask_cache:   # background-present targets: >=1 read in unspiked background
                 bacc = defaultdict(lambda: defaultdict(float, starts=[], blocks=[]))
                 accumulate(work / "bg" / f"{run}.bam", bacc)
                 mask_cache[run] = {u for u, v in bacc.items() if v["n"] >= 1 and u in targets}
             mask = mask_cache[run]
             acc = defaultdict(lambda: defaultdict(float, starts=[], blocks=[]))
-            accumulate(work / "bg" / f"{run}.bam", acc)
+            if run != "none":
+                accumulate(work / "bg" / f"{run}.bam", acc)
             accumulate(sd / "spike.bam", acc)
             kscore = kma_res(sd / "sample.res")
-            total_pairs = a.bg_pairs + int((sd / "spike_pairs.txt").read_text())
+            total_pairs = (0 if run == "none" else a.bg_pairs) + int((sd / "spike_pairs.txt").read_text())
             # truth for this sample
             pos, amb = {}, set()
             for j in (1, 2, 3):
+                if not d.get(f"iso{j}"): continue
                 b, cov = d[f"iso{j}"], float(d[f"cov{j}"])
                 for u, st in lab[b].items():
                     if st == "strict": pos[u] = max(cov, pos.get(u, 0))

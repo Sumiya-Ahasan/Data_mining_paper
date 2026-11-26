@@ -6,8 +6,9 @@ G1 power:  n calibration nulls (ALL cal nulls incl. zero-read ones, from null_to
 G2 decoys: validity needs decoy null scores to be at least as heavy-tailed as target null scores (then
            p-values are conservative). One-sided test: tail rate per null (all nulls, incl. zero-read) above
            decoy-score quantiles, target nulls vs decoys, Fisher exact (greater). fail = any p < 0.05;
-           pass = >= 10 target-null tail events at the median threshold and no fail; else inconclusive.
-           Score = logistic P(positive) cross-fitted by role (train on cal, score test, and vice versa).
+           pass = no fail and >= 5 target-null events expected at the 99% decoy threshold under equal
+           rates (enough power); else inconclusive. Lists the top target-null hits (check for label misses).
+           Score = logistic P(positive), cross-fitted by role (each role scored by a model fit on the others).
            The two-sided C2ST AUC (hits only) is kept as a diagnostic.
 G3 shift:  classifier two-sample test, cal vs test decoy hits (pass: AUC > 0.60) + indicative n_eff.
 Also prints label counts and where null reads come from (background vs spike).
@@ -98,8 +99,8 @@ def main():
     gb, lr, n0, n1 = c2st_auc(nulls[nulls.is_decoy == 0][FEATURES].values, nulls[nulls.is_decoy == 1][FEATURES].values)
     g2 = {"c2st_auc_lightgbm": gb, "c2st_auc_logistic": lr, "n_target_null_hits": n0, "n_decoy_null_hits": n1}
     sc = pd.Series(np.nan, index=hit.index)
-    for tr, te in (("cal", "test"), ("test", "cal")):
-        T = hit[(hit.role == tr) & ((hit.y == 1) | (hit.is_decoy == 1))]
+    for te in sorted(hit.role.unique()):          # cross-fit: score each role with a model fit on the others
+        T = hit[(hit.role != te) & ((hit.y == 1) | (hit.is_decoy == 1))]
         if T.y.nunique() < 2: continue
         mdl = make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000, class_weight="balanced"))
         mdl.fit(T[FEATURES].values, (T.y == 1).astype(int).values)
@@ -108,16 +109,22 @@ def main():
     TN, DN = int(tot.target_nulls.sum()), int(tot.decoy_nulls.sum())
     tails, worst_p = [], 1.0
     if len(dn_s):
-        for qq in (0.5, 0.9, 0.99):
+        for qq in (0.5, 0.9, 0.99, 0.999):
             t = float(dn_s.quantile(qq)); a_ = int((tn_s >= t).sum()); b_ = int((dn_s >= t).sum())
             pv = float(fisher_exact([[a_, TN - a_], [b_, DN - b_]], alternative="greater")[1])
             worst_p = min(worst_p, pv)
             tails.append({"decoy_quantile": qq, "threshold": round(t, 4), "target_null_events": a_,
-                          "decoy_events": b_, "target_null_rate_per10k": round(1e4 * a_ / TN, 2),
+                          "decoy_events": b_, "expected_target_null_events_if_equal": round(b_ / DN * TN, 2),
+                          "target_null_rate_per10k": round(1e4 * a_ / TN, 2),
                           "decoy_rate_per10k": round(1e4 * b_ / DN, 2), "fisher_p_greater": round(pv, 4)})
     g2.update(tails=tails, n_target_nulls_all=TN, n_decoy_nulls_all=DN)
-    g2["verdict"] = ("fail" if worst_p < 0.05 else
-                     "pass" if tails and tails[0]["target_null_events"] >= 10 else "inconclusive")
+    # pass needs power in the tail: >= 5 target-null events expected at the 99% decoy threshold if rates were equal
+    powered = len(tails) > 2 and tails[2]["expected_target_null_events_if_equal"] >= 5
+    g2["verdict"] = "fail" if worst_p < 0.05 else ("pass" if powered else "inconclusive")
+    top = hit.loc[tn_s.sort_values(ascending=False).index[:15]]
+    g2["top_target_nulls"] = [dict(sample=r["sample"], unit=r["unit"], score=round(float(tn_s[i]), 4),
+                                   n_reads=int(r["n_reads"]), mean_identity=float(r["mean_identity"]))
+                              for i, r in top.iterrows()]
     res["G2_decoy_validity"] = g2
 
     # G3
