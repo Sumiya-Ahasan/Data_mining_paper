@@ -42,5 +42,8 @@ Legend: [x] done · [ ] todo · (YOU) = manual step for the researcher · (C) = 
 - [x] (C) Decoy v2 (U/N/M types, 150-bp window cap) + label v2 (merged HSPs, fragment class, all cluster members) + per-type G2; tested locally (src/make_decoys_v2.py, filter_decoys.py, window_id.py, build_reference_v2.sh)
 - [x] (YOU) Run G2 test v2 on Kaggle (dm_g2v2, 174/174, G2V2 FINISHED OK)
 - [x] (C) Check G2 test v2: G2 FAIL for every decoy type (U, N, M, N+M), also with target nulls in score training and when restricted to non-efflux or inactivation-only targets → results/g2v2/
-- [ ] (YOU, + supervisor) Decide the calibration-null source (decoys fail; see decision_log 2026-11-26 G2 v2)
+- [x] Calibration-null source decided: simulated communities, labelled nulls (plan v3; inform supervisor)
+- [x] (C) Simulated-community pipeline + conformal evaluation (src/community.py, src/conformal_eval.py), tested locally
+- [ ] (YOU) Run notebooks/simcomm_kaggle.md (dm_simcomm; inputs dm_g2v2 output, dm_g2ext output, ww-bg-5m); send simcomm_results.tgz
+- [ ] (YOU) Tell supervisor: decoys failed G2 twice; main method now calibrates on simulated communities (plan v3, §8b assumptions)
 - [ ] (YOU) Security: rotate the GitHub token (it was stored in repo/.git/config inside Kaggle outputs of all 3 notebooks; fixed in the notebook code); delete C:/Users/User/Downloads/g2v2_results.zip after Claude's check

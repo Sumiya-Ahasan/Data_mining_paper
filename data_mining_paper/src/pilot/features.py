@@ -9,7 +9,9 @@ Labels (column y): 1 = target in a spiked isolate (strict), even if the backgrou
 NaN = unspiked background-present target or isolate fragment hit (label v2) -> excluded from scoring.
 decoy_type = U/N/M for decoy v2 (make_decoys_v2.py); null_totals.tsv also has decoy_nulls_<type>.
 Diagnostic columns (never model features): is_decoy, bg_present, bg_reads, n_spike_reads, coverage, sample, role.
-Also writes <out dir>/null_totals.tsv: all nulls per sample incl. zero-read ones (they count in conformal n).
+Also writes <out dir>/null_totals.tsv: all nulls per sample incl. zero-read ones (they count in conformal n),
+and <out dir>/truth.tsv.gz: every positive (with coverage) and excluded unit per sample; all other targets are nulls.
+--members (community.py): truth from every genome in the sample, background genomes included (nothing masked).
 
 Usage: python features.py --ref REF --work WORK --out results/pilot/features.tsv.gz
 """
@@ -108,6 +110,8 @@ def main():
     p.add_argument("--design", default=str(REPO / "data_manifest/pilot_design.tsv"),
                    help="background 'none' rows = isolate reads only (no mask, no background BAM)")
     p.add_argument("--out", default="/kaggle/working/pilot/features.tsv.gz")
+    p.add_argument("--members", default="", help="simulated communities (community.py design_members.tsv): truth "
+                   "from ALL genomes in a sample (background + spike); replaces iso1..3 columns")
     a = p.parse_args()
     ref, work = Path(a.ref), Path(a.work)
 
@@ -121,6 +125,11 @@ def main():
     for r in tsv_read(work / "labels/isolate_args.tsv"):
         lab[r["biosample"]][r["unit"]] = r["status"]
 
+    members = defaultdict(list)
+    if a.members:
+        for r in tsv_read(Path(a.members)): members[r["sample"]].append((r["genome"], float(r["coverage"])))
+    truth_fh = gzip.open(Path(a.out).parent / "truth.tsv.gz", "wt", newline="")
+    truth_fh.write("sample\tunit\tstatus\tcoverage\n")
     mask_cache = {}
     out_rows = 0
     totals = []
@@ -148,13 +157,15 @@ def main():
             total_pairs = (0 if run == "none" else a.bg_pairs) + int((sd / "spike_pairs.txt").read_text())
             # truth for this sample
             pos, amb = {}, set()
-            for j in (1, 2, 3):
-                if not d.get(f"iso{j}"): continue
-                b, cov = d[f"iso{j}"], float(d[f"cov{j}"])
+            carriers = members[d["sample"]] if a.members else \
+                [(d[f"iso{j}"], float(d[f"cov{j}"])) for j in (1, 2, 3) if d.get(f"iso{j}")]
+            for b, cov in carriers:
                 for u, st in lab[b].items():
                     if st == "strict": pos[u] = max(cov, pos.get(u, 0))
                     else: amb.add(u)
             amb -= set(pos)   # strict in one isolate wins over ambiguous in another
+            for u, cov in pos.items(): truth_fh.write(f"{d['sample']}\t{u}\tpositive\t{cov}\n")
+            for u in sorted(amb): truth_fh.write(f"{d['sample']}\t{u}\texcluded\t\n")
             totals.append(dict(sample=d["sample"], role=d["role"], decoy_nulls=len(seqs) - len(targets),
                                target_nulls=len(targets - mask - set(pos) - amb),
                                **{f"decoy_nulls_{t}": n for t, n in n_dtype.items()}))
@@ -196,6 +207,7 @@ def main():
                 w.writerow(row); out_rows += 1
             print(d["sample"], "units with reads:", len(acc), "positives present:",
                   sum(1 for u in pos if u in acc), "/", len(pos), flush=True)
+    truth_fh.close()
     tot_path = Path(a.out).parent / "null_totals.tsv"
     with open(tot_path, "w", newline="") as fh:
         w = csv.DictWriter(fh, ["sample", "role", "decoy_nulls", "target_nulls"] + [f"decoy_nulls_{t}" for t in dtypes],

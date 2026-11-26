@@ -1,4 +1,7 @@
-# Method plan (v2, 2026-11-24) — single source of truth
+# Method plan (v3, 2026-11-26) — single source of truth
+
+v3: decoys failed G2 (v1 uniform and v2 homolog-structured; decision_log 2026-11-26) → calibration nulls are
+labelled absent targets in simulated communities with fully known truth. Decoys stay only as a comparison arm.
 
 **Title (working):** Calibrated, FDR-controlled detection of low-abundance ARGs in wastewater metagenomes under background shift.
 
@@ -7,15 +10,27 @@
 - **RQ2:** Under geographic / platform / matrix shift, which calibration (unweighted, weighted WCS / e-BH, within-sample decoys) keeps FDR ≤ q at least power cost; which features drive the shift?
 
 ## 1. Hypotheses & labels
-- Unit = (sample s, ARG family j), m = |card_90| (~1318). H0: family j absent from spiked content.
-- Y=1: in a spiked isolate's ARG set (RGI Perfect/Strict on genome). Y=0: not in any spiked isolate AND 0 reads in the unspiked background. Ambiguous (≥1 background read): tested, excluded from FDP numerator and denominator.
-- Spiked sample reuses the identical 5M-pair background subsample → exact mask.
-- Caveat to report: LoD applies to ARGs rare in that background.
+- Unit = (sample s, ARG family j), m = |card_90| (1318). H0: family j absent from the sample.
+- Labels (label v2, `src/window_id.py`), from BLAST of every genome in the sample: Y=1 strict (≥90% id HSPs cover ≥80% of a
+  cluster member); excluded = fragment (a 150-bp window ≥90% id, not strict); Y=0 = everything else, distant homologs included.
+- Simulated communities (`src/community.py`): every genome is known → nothing is masked; absent targets with homolog reads stay nulls.
+- Real backgrounds (spike-in check only): background content unknown → evaluate only spiked targets / sequins there.
 
-## 2. Decoys (null generator)
+## 2. Decoys (comparison arm only — failed as null generator)
+- G2 FAIL for uniform 75–85% (v1) and near/mosaic (v2) decoys: a decoy loses homolog reads to its parent target
+  (decision_log 2026-11-26). Kept as the decoy-calibrated / TDC comparison and reported as a negative result.
 - `src/make_decoys.py`: 3 decoys per target, 75–85% identity, substitution-only, 3rd-codon biased, no in-frame stops.
 - `src/build_reference.sh`: drop decoys ≥90% id to any target (cd-hit-est-2d), dedupe decoys at 90%; index targets+decoys (KMA, Bowtie2); also targets-only index for the read-competition check.
 - Key assumption (Gate G2): decoy nulls exchangeable with true target nulls.
+
+## 2b. Simulated communities (main calibration and evaluation)
+- Template per real background: Kraken2 standard-8 (2025-04-02 index) + Bracken species profile; species with a RefSeq
+  assembly (≤40 per template, ≥0.05% of read pairs); ≤3 assemblies per species: pool A (train/cal/test_same), pool B
+  (test_shift = unseen strains). Raphenya isolates excluded from backgrounds.
+- Sample = background genomes at template share × log-normal noise (σ 0.5) of 5M nominal pairs + 3 spiked isolates (ladder).
+- ART HS25 reads only from alignable regions (150-bp tiles step 50 that align to card90d, ±500 bp), at max(cov,10)× then
+  thinned to the target coverage. Unclassified / non-RefSeq reads are not simulated (realism gap → gate R).
+- Pilot: train 20 (DNK), cal 20 (PAK), test_same 10 (PAK), test_shift 10 (SEN). Notebook: notebooks/simcomm_kaggle.md.
 
 ## 3. Data (verified 2026-11-24, see data_manifest/)
 | Role | Runs | Verified facts |
@@ -33,17 +48,18 @@
 - Reads: InSilicoSeq, platform-matched error model (verify read length; else `iss model`).
 
 ## 4. Score
-14 features (targets and decoys identical, no is_decoy feature). LightGBM μ̂(X), train split only, decoys labelled Y=0.
+15 features (no is_decoy feature). LightGBM μ̂(X) on the train role, labels Y (target nulls + positives).
 
 ## 5. Calibration & selection
-p_j = (1 + #{i∈C0: V_i ≥ V_j}) / (n+1); zero-read → p=1.
+p_j = (1 + #{i∈C0: V_i ≥ V_j}) / (n+1); C0 = all labelled cal target nulls (zero-read ones count); zero-read test unit → p=1.
 | Arm | Calibration nulls | Procedure |
 |---|---|---|
-| M1 | pooled cal nulls | BH (valid: unweighted conformal p are PRDS) |
-| M2 | same + w(x) | WCS (Jin & Candès 2023) — NOT plain BH |
-| M3 | same + w(x) | weighted conformal e-values + e-BH (verify construction) |
-| M4 | test sample's own decoys | BH |
-Weights: L2 logistic domain classifier on **decoy hits only** (cal vs test), clipped at 95th pct; report n_eff = (Σw)²/Σw².
+| M1 | pooled labelled cal target nulls | BH per sample (`src/conformal_eval.py`) |
+| M1s | same, per stratum (CARD mechanism efflux vs other; Mondrian) | BH per sample |
+| M2 | M1 + w(x) | WCS (Jin & Candès 2023) — NOT plain BH (to write after the pilot) |
+| M3 | M1 + w(x) | weighted conformal e-values + e-BH (verify construction) |
+| M4 | cal decoys | BH — comparison arm (expected to fail) |
+Weights: L2 logistic domain classifier on hits (cal vs test, unlabelled features only), clipped at 95th pct; n_eff = (Σw)²/Σw².
 Power rule: need n_eff + 1 ≥ m/(q·k).
 
 ## 6. Baselines
@@ -57,9 +73,18 @@ External (PRJNA1095031): Mix A sequins = positives; **NTC sequins (in reference,
 ## 8. Pilot gates (weeks 2–4)
 | Gate | Test | Pass | Fail → |
 |---|---|---|---|
-| G1 | n_eff of cal nulls | ≥ m/(q·k) at q=0.1 | d=5 decoys, more cal mixes, or report q≥0.1 |
-| G2 | C2ST decoy-null vs target-null | AUC ≤ 0.6 | target nulls only; decoys only for weights; drop M4 |
-| G3 | domain AUC cal vs test (nulls) | > 0.6 | RQ2 = "no correction needed" (still reportable) |
+| G1 | n cal nulls | ≥ m/(q·k) at q=0.1 | more cal communities |
+| ~~G2~~ | decoy vs target-null tails | FAILED twice → decoys dropped as calibration | (done) |
+| V1 | FDR on test_same (no shift), M1/M1s | mean FDP ≤ q (q=0.05, 0.10) | check score / strata; Mondrian by target |
+| V2 | FDR on test_shift, M1 | report; > q → weighted arms needed (RQ2) | — |
+| R | realism: sim vs real background (units hit, reads on targets/M, read identity, efflux share) | same order of magnitude | add genomes / unclassified proxy; state limitation |
+
+## 8b. Untested assumptions (check before claiming)
+1. Simulated communities produce homolog reads like real wastewater (unclassified reads are not simulated) → gate R + real-data spike-in/sequin check.
+2. Pooled calibration across targets: targets differ (efflux genes get far more null hits) → M1s Mondrian arm; report FDP per stratum.
+3. Region-restricted simulation loses spurious alignments from the rest of the genome → main run: one community simulated full-genome vs restricted.
+4. Units within a sample are dependent → FDR is estimated over samples (bootstrap), not assumed.
+5. Kraken misassignment changes only realism, not truth (truth = genomes actually simulated).
 
 ## 9. Related work that MUST be cited/positioned
 - Jin & Candès 2025, Biometrika (doi:10.1093/biomet/asaf066; arXiv 2307.09291) weighted conformalized selection.
