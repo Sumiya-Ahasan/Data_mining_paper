@@ -1,0 +1,6 @@
+{
+ "run": "ERR1713384",
+ "total_pairs": 5000000,
+ "method": "kraken_clade",
+ "classified_species_frac": 0.1443
+}

@@ -96,7 +96,7 @@ C = f"--work {W} --ref {REF} --bg {BGD} --k2db /tmp/k2 --threads 4"
 ### Cell 7 — pack ONLY the small results for Claude
 ```python
 # Cell 7 — pack ONLY the small results for Claude
-!cd /kaggle/working && tar czf simcomm_results.tgz simcomm/log4.txt simcomm/log5.txt simcomm/log6.txt simcomm/profiles simcomm/community_genomes.tsv simcomm/design_samples.tsv simcomm/design_members.tsv simcomm/regions/regions.tsv simcomm/labels/isolate_args.tsv simcomm/features.tsv.gz simcomm/truth.tsv.gz simcomm/null_totals.tsv simcomm/eval.json simcomm/realism.tsv 2>/dev/null; ls -la simcomm_results.tgz
+!cd /kaggle/working && tar czf simcomm_results.tgz simcomm/log4.txt simcomm/log5.txt simcomm/log6.txt simcomm/profiles simcomm/community_genomes.tsv simcomm/design_samples.tsv simcomm/design_members.tsv simcomm/regions/regions.tsv simcomm/labels/isolate_args.tsv simcomm/features.tsv.gz simcomm/truth.tsv.gz simcomm/null_totals.tsv simcomm/eval.json simcomm/realism.tsv simcomm/realism_units.tsv 2>/dev/null; ls -la simcomm_results.tgz
 ```
 Download only **`simcomm_results.tgz`** (Output tab → that file's ⋮ → Download), **not** "Download all".
 

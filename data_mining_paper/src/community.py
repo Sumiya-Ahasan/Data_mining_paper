@@ -308,7 +308,8 @@ def cmd_simulate(a):
 # ---------------------------------------------------------------- realism check
 def cmd_realism(a):
     """Per sample: target units with >=1 / >=10 reads, reads on targets per million pairs, median read identity of
-    target hits, share of hit units in the efflux class; real background BAM vs its simulated communities."""
+    target hits, share of hit units in the efflux class; real background BAM vs its simulated communities.
+    Also realism_units.tsv: per template and target unit, real reads vs mean non-spike reads in its simulations."""
     import numpy as np
     sys.path.insert(0, str(REPO / "src/pilot")); from features import accumulate, read_fasta as rf
     work, ref = Path(a.work), Path(a.ref)
@@ -316,10 +317,15 @@ def cmd_realism(a):
     aro = {r["ARO Accession"]: r["Resistance Mechanism"] for r in pilot.tsv_read(ref / "card/aro_index.tsv")}
     efflux = {t for t in targets if "efflux" in aro.get(t.split("|")[4], "")}
 
-    def summ(bam, pairs):
+    per_unit = defaultdict(lambda: defaultdict(list))   # (template, unit) -> {"real": [n], "sim": [non-spike n]}
+
+    def summ(bam, pairs, key):
         acc = defaultdict(lambda: defaultdict(float, starts=[], blocks=[]))
         accumulate(bam, acc)
         hit = {u: v for u, v in acc.items() if u in targets}
+        tmpl, kind = key
+        for u, v in hit.items():
+            per_unit[(tmpl, u)][kind].append(int(v["n"]) if kind == "real" else int(v["n"] - v["spike"]))
         idn = [v["ident"] / v["n"] for v in hit.values()]
         return dict(units_ge1=len(hit), units_ge10=sum(v["n"] >= 10 for v in hit.values()),
                     target_reads_per_M=round(sum(v["n"] for v in hit.values()) / (pairs / 1e6), 2),
@@ -328,13 +334,21 @@ def cmd_realism(a):
     rows = []
     prof = {p.stem.split(".")[0]: json.load(open(p)) for p in (work / "profiles").glob("*.summary.json")}
     for run in runs_of(a):
-        rows.append(dict(kind="real", sample=run, template=run, **summ(work / "bg" / f"{run}.bam", prof[run]["total_pairs"])))
+        rows.append(dict(kind="real", sample=run, template=run, **summ(work / "bg" / f"{run}.bam", prof[run]["total_pairs"], (run, "real"))))
     for s in pilot.tsv_read(work / "design_samples.tsv"):
         b = work / "samples" / s["sample"] / "spike.bam"
         if b.exists():
             rows.append(dict(kind="sim_" + s["role"], sample=s["sample"], template=s["template"],
-                             **summ(b, int(s["n_pairs"]))))
+                             **summ(b, int(s["n_pairs"]), (s["template"], "sim"))))
     pilot.tsv_write(work / "realism.tsv", rows, list(rows[0]))
+    n_sim = defaultdict(int)
+    for r in rows:
+        if r["kind"] != "real": n_sim[r["template"]] += 1
+    urows = [dict(template=t, unit=u, mechanism=aro.get(u.split("|")[4], ""), real_reads=sum(v["real"]),
+                  sim_mean_reads=round(sum(v["sim"]) / max(1, n_sim[t]), 2),
+                  sim_frac_hit=round(sum(x > 0 for x in v["sim"]) / max(1, n_sim[t]), 3))
+             for (t, u), v in sorted(per_unit.items())]
+    if urows: pilot.tsv_write(work / "realism_units.tsv", urows, list(urows[0]))
     print("realism ->", work / "realism.tsv")
 
 

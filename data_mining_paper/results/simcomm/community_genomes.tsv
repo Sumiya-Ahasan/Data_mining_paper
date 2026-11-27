@@ -1,0 +1,227 @@
+species_taxid	species	assembly	pool	genome_size	level	ftp_path
+100886	Catenibacterium mitsuokai	GCF_025148785.1	A	2650196	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/025/148/785/GCF_025148785.1_ASM2514878v1/
+100886	Catenibacterium mitsuokai	GCF_988234145.1	A	2800879	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/234/145/GCF_988234145.1_GF3HA24001B/
+100886	Catenibacterium mitsuokai	GCF_988235565.1	B	2800941	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/235/565/GCF_988235565.1_HF3HA24004B/
+108981	Acinetobacter schindleri	GCF_010918895.1	A	3337186	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/010/918/895/GCF_010918895.1_ASM1091889v1/
+108981	Acinetobacter schindleri	GCF_028657965.1	A	3332387	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/028/657/965/GCF_028657965.1_ASM2865796v1/
+108981	Acinetobacter schindleri	GCF_027942235.1	B	3265024	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/027/942/235/GCF_027942235.1_ASM2794223v1/
+111769	Thiothrix unzii	GCF_017901175.1	AB	3724392	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/017/901/175/GCF_017901175.1_ASM1790117v1/
+1206777	Pseudomonas sp. Lz4W	GCF_000346225.2	AB	5018820	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/346/225/GCF_000346225.2_ASM34622v2/
+122355	Pseudomonas psychrophila	GCF_011040435.1	A	5313922	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/011/040/435/GCF_011040435.1_ASM1104043v1/
+122355	Pseudomonas psychrophila	GCF_036324525.1	A	5313587	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/036/324/525/GCF_036324525.1_ASM3632452v1/
+122355	Pseudomonas psychrophila	GCF_900106105.1	B	5322478	Chromosome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/106/105/GCF_900106105.1_IMG-taxon_2636416189_annotated_assembly/
+1278212	Arcobacter suis	GCF_003544815.1	A	2639269	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/544/815/GCF_003544815.1_ASM354481v1/
+1278212	Arcobacter suis	GCF_965139935.1	A	2585793	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/965/139/935/GCF_965139935.1_CIP110783T/
+1278212	Arcobacter suis	GCF_004023465.1	B	2621793	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/004/023/465/GCF_004023465.1_ASM402346v1/
+128785	Pseudoxanthomonas mexicana	GCF_014397415.1	A	3966848	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/014/397/415/GCF_014397415.1_ASM1439741v1/
+128785	Pseudoxanthomonas mexicana	GCF_965209405.1	A	4124367	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/965/209/405/GCF_965209405.1_isolate-02.bin/
+128785	Pseudoxanthomonas mexicana	GCF_965210795.1	B	3914583	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/965/210/795/GCF_965210795.1_isolate-65.bin/
+1308	Streptococcus thermophilus	GCF_903886475.1	A	1791634	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/903/886/475/GCF_903886475.1_Streptococcus_thermophilus_CIRM_65/
+1308	Streptococcus thermophilus	GCF_009709655.2	A	1796866	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/709/655/GCF_009709655.2_ASM970965v2/
+1308	Streptococcus thermophilus	GCF_057813595.1	B	1862560	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/057/813/595/GCF_057813595.1_ASM5781359v1/
+1366	Lactococcus raffinolactis	GCF_010669245.1	A	2295672	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/010/669/245/GCF_010669245.1_ASM1066924v1/
+1366	Lactococcus raffinolactis	GCF_047221435.1	A	2270555	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/047/221/435/GCF_047221435.1_ASM4722143v1/
+1366	Lactococcus raffinolactis	GCF_040954465.1	B	2348986	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/040/954/465/GCF_040954465.1_ASM4095446v1/
+1463158	Thermomonas carbonis	GCF_014652775.1	A	3446793	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/014/652/775/GCF_014652775.1_ASM1465277v1/
+1463158	Thermomonas carbonis	GCF_014396975.1	B	3456638	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/014/396/975/GCF_014396975.1_ASM1439697v1/
+1501662	Streptococcus parasuis	GCF_021654455.1	A	2197342	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/021/654/455/GCF_021654455.1_ASM2165445v1/
+1501662	Streptococcus parasuis	GCF_060053485.1	A	1945306	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/060/053/485/GCF_060053485.1_ASM6005348v1/
+1501662	Streptococcus parasuis	GCF_060053505.1	B	1973553	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/060/053/505/GCF_060053505.1_ASM6005350v1/
+1511	Acetoanaerobium sticklandii	GCF_000196455.1	AB	2715461	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/196/455/GCF_000196455.1_ASM19645v1/
+158836	Enterobacter hormaechei	GCF_019048245.1	A	4915930	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/019/048/245/GCF_019048245.1_ASM1904824v1/
+158836	Enterobacter hormaechei	GCF_062075910.1	A	5011059	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/075/910/GCF_062075910.1_ASM62075910v1/
+158836	Enterobacter hormaechei	GCF_062057544.1	B	4830116	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/057/544/GCF_062057544.1_ASM62057544v1/
+1608996	Pseudomonas helleri	GCF_045830615.1	A	5638943	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/045/830/615/GCF_045830615.1_Chloe_Pseudomonas_helleri_NF1a/
+1608996	Pseudomonas helleri	GCF_044742895.1	A	5637674	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/044/742/895/GCF_044742895.1_ASM4474289v1/
+1608996	Pseudomonas helleri	GCF_044542065.1	B	5306561	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/044/542/065/GCF_044542065.1_ASM4454206v1/
+1623	Ligilactobacillus ruminis	GCF_000224985.1	A	2066652	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/224/985/GCF_000224985.1_ASM22498v1/
+1623	Ligilactobacillus ruminis	GCF_988234515.1	A	2259033	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/234/515/GCF_988234515.1_JF-2C-1/
+1623	Ligilactobacillus ruminis	GCF_988234635.1	B	2282510	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/234/635/GCF_988234635.1_JF-2C-2/
+165179	Segatella copri	GCF_020735445.1	A	3551614	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/020/735/445/GCF_020735445.1_ASM2073544v1/
+165179	Segatella copri	GCF_988236945.1	A	3880629	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/236/945/GCF_988236945.1_RSZYD15080301_A/
+165179	Segatella copri	GCF_988237015.1	B	3787843	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/237/015/GCF_988237015.1_PF3HA21002B/
+1680	Bifidobacterium adolescentis	GCF_000010425.1	A	2089645	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/010/425/GCF_000010425.1_ASM1042v1/
+1680	Bifidobacterium adolescentis	GCF_062092486.1	A	2259551	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/092/486/GCF_062092486.1_ASM62092486v1/
+1680	Bifidobacterium adolescentis	GCF_988230265.1	B	2122792	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/230/265/GCF_988230265.1_AF118-10-104/
+168471	Laribacter hongkongensis	GCF_000423285.1	A	3110307	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/423/285/GCF_000423285.1_ASM42328v1/
+168471	Laribacter hongkongensis	GCF_902386745.1	A	3424272	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/902/386/745/GCF_902386745.1_UHGG_MGYG-HGUT-02398/
+168471	Laribacter hongkongensis	GCF_002215055.1	B	3424272	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/215/055/GCF_002215055.1_ASM221505v1/
+1686	Bifidobacterium catenulatum	GCF_001025195.1	A	2079525	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/025/195/GCF_001025195.1_ASM102519v1/
+1686	Bifidobacterium catenulatum	GCF_050516145.1	A	2164444	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/050/516/145/GCF_050516145.1_ASM5051614v1/
+1686	Bifidobacterium catenulatum	GCF_050308155.1	B	2405890	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/050/308/155/GCF_050308155.1_ASM5030815v1/
+1788301	Pseudomonas versuta	GCF_001294575.1	A	5149788	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/294/575/GCF_001294575.1_ASM129457v1/
+1788301	Pseudomonas versuta	GCF_044358235.1	A	5150253	Chromosome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/044/358/235/GCF_044358235.1_ASM4435823v1/
+1788301	Pseudomonas versuta	GCF_058188475.1	B	5848536	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/058/188/475/GCF_058188475.1_ASM5818847v1/
+1812935	Enterobacter roggenkampii	GCF_001729805.1	A	4899997	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/729/805/GCF_001729805.1_ASM172980v1/
+1812935	Enterobacter roggenkampii	GCF_062052630.1	A	4653214	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/052/630/GCF_062052630.1_ASM62052630v1/
+1812935	Enterobacter roggenkampii	GCF_988260415.1	B	4908862	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/260/415/GCF_988260415.1_AB83_long_read_assembly/
+1849015	Arcobacter acticola	GCF_013177675.1	AB	3019071	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/013/177/675/GCF_013177675.1_ASM1317767v1/
+1858609	Acidovorax sp. T1	GCF_002176815.1	AB	4416593	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/176/815/GCF_002176815.1_ASM217681v1/
+2004646	Acinetobacter sp. WCHA55	GCF_002165305.2	AB	3967361	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/165/305/GCF_002165305.2_ASM216530v2/
+2004710	Cloacibacterium caeni	GCF_907163105.1	A	2718917	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/907/163/105/GCF_907163105.1_CB-03_assembly/
+2004710	Cloacibacterium caeni	GCF_907163125.1	B	2979886	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/907/163/125/GCF_907163125.1_CB-01_assembly/
+2006115	Acinetobacter piscicola	GCF_002233755.1	A	3576146	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/233/755/GCF_002233755.1_ASM223375v1/
+2006115	Acinetobacter piscicola	GCF_041519375.1	A	3667158	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/041/519/375/GCF_041519375.1_ASM4151937v1/
+2006115	Acinetobacter piscicola	GCF_015218165.1	B	4280081	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/015/218/165/GCF_015218165.1_ASM1521816v1/
+2023260	Megasphaera sp.	GCF_062091871.1	AB	2380860	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/091/871/GCF_062091871.1_ASM62091871v1/
+202956	Acinetobacter towneri	GCF_017498585.1	A	2799835	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/017/498/585/GCF_017498585.1_ASM1749858v1/
+202956	Acinetobacter towneri	GCF_048572845.1	A	3059610	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/048/572/845/GCF_048572845.1_ASM4857284v1/
+202956	Acinetobacter towneri	GCF_040436385.1	B	3080920	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/040/436/385/GCF_040436385.1_ASM4043638v1/
+2094020	Trichococcus shcherbakoviae	GCF_006370295.1	A	3134598	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/370/295/GCF_006370295.1_ASM637029v1/
+2094020	Trichococcus shcherbakoviae	GCF_900416805.1	B	3137223	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/416/805/GCF_900416805.1_ART1/
+216816	Bifidobacterium longum	GCF_000196555.1	A	2385164	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/196/555/GCF_000196555.1_ASM19655v1/
+216816	Bifidobacterium longum	GCF_016759745.2	A	2409983	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/759/745/GCF_016759745.2_ASM1675974v2/
+216816	Bifidobacterium longum	GCF_060709155.1	B	2406782	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/060/709/155/GCF_060709155.1_ASM6070915v1/
+225991	Comamonas aquatica	GCF_018064205.1	A	3969186	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/018/064/205/GCF_018064205.1_ASM1806420v1/
+225991	Comamonas aquatica	GCF_056488365.1	A	3821750	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/056/488/365/GCF_056488365.1_ASM5648836v1/
+225991	Comamonas aquatica	GCF_027595065.1	B	4016904	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/027/595/065/GCF_027595065.1_ASM2759506v1/
+2316085	Pseudomonas bubulae	GCF_037023725.1	A	5258720	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/037/023/725/GCF_037023725.1_ASM3702372v1/
+2316085	Pseudomonas bubulae	GCF_047222365.1	A	5163480	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/047/222/365/GCF_047222365.1_ASM4722236v1/
+2316085	Pseudomonas bubulae	GCF_037023715.1	B	5242423	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/037/023/715/GCF_037023715.1_ASM3702371v1/
+237258	Cloacibacterium normanense	GCF_003860565.1	A	2759562	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/860/565/GCF_003860565.1_ASM386056v1/
+237258	Cloacibacterium normanense	GCF_041431195.1	A	2927420	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/041/431/195/GCF_041431195.1_ASM4143119v1/
+237258	Cloacibacterium normanense	GCF_002943105.1	B	2841428	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/943/105/GCF_002943105.1_ASM294310v1/
+239935	Akkermansia muciniphila	GCF_009731575.1	A	2878459	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/731/575/GCF_009731575.1_ASM973157v1/
+239935	Akkermansia muciniphila	GCF_062077372.1	A	2779119	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/077/372/GCF_062077372.1_ASM62077372v1/
+239935	Akkermansia muciniphila	GCF_059683705.1	B	2867989	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/059/683/705/GCF_059683705.1_ASM5968370v1/
+2478662	Acidovorax sp. 1608163	GCF_003669015.1	AB	5045878	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/669/015/GCF_003669015.1_ASM366901v1/
+2478954	Catenibacterium sp. co_0103	GCF_004168205.1	AB	2540390	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/004/168/205/GCF_004168205.1_ASM416820v1/
+2487072	Epilithonimonas vandammei	GCF_003860525.1	A	3276391	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/860/525/GCF_003860525.1_ASM386052v1/
+2487072	Epilithonimonas vandammei	GCF_003860605.1	B	3367586	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/860/605/GCF_003860605.1_ASM386060v1/
+2518343	Acidovorax sp. JMULE5	GCF_013376875.1	AB	5455909	Chromosome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/013/376/875/GCF_013376875.1_ASM1337687v1/
+2518605	Segatella hominis	GCF_004535825.1	A	4105402	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/004/535/825/GCF_004535825.1_ASM453582v1/
+2518605	Segatella hominis	GCF_019249725.2	A	4119191	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/019/249/725/GCF_019249725.2_ASM1924972v2/
+2518605	Segatella hominis	GCF_025460925.1	B	4032711	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/025/460/925/GCF_025460925.1_ASM2546092v1/
+252130	Uruburuella suis	GCF_022870845.1	A	2729985	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/022/870/845/GCF_022870845.1_ASM2287084v1/
+252130	Uruburuella suis	GCF_004341385.1	B	2641702	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/004/341/385/GCF_004341385.1_ASM434138v1/
+2600598	Pseudomonas saxonica	GCF_007858365.1	A	5310198	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/007/858/365/GCF_007858365.1_ASM785836v1/
+2600598	Pseudomonas saxonica	GCF_035610385.1	A	5362120	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/035/610/385/GCF_035610385.1_ASM3561038v1/
+2600598	Pseudomonas saxonica	GCF_055406545.1	B	5315514	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/055/406/545/GCF_055406545.1_ASM5540654v1/
+2743575	Acinetobacter sp. NEB 394	GCF_013374795.1	AB	3842079	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/013/374/795/GCF_013374795.1_ASM1337479v1/
+2760308	Propioniciclava sp. MC1595	GCF_017569205.1	A	3430973	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/017/569/205/GCF_017569205.1_ASM1756920v1/
+2760308	Propioniciclava sp. MC1595	GCF_014164685.1	B	3363831	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/014/164/685/GCF_014164685.1_ASM1416468v1/
+2763672	Simiaoa sunii	GCF_014337175.1	AB	3572951	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/014/337/175/GCF_014337175.1_ASM1433717v1/
+28090	Acinetobacter lwoffii	GCF_029024105.1	A	3463679	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/029/024/105/GCF_029024105.1_ASM2902410v1/
+28090	Acinetobacter lwoffii	GCF_050703235.2	A	3697246	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/050/703/235/GCF_050703235.2_ASM50703235v2/
+28090	Acinetobacter lwoffii	GCF_057834825.1	B	3445299	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/057/834/825/GCF_057834825.1_ASM5783482v1/
+28117	Alistipes putredinis	GCF_000154465.1	A	2550678	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/154/465/GCF_000154465.1_ASM15446v1/
+28117	Alistipes putredinis	GCF_058182505.1	A	2350222	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/058/182/505/GCF_058182505.1_ASM5818250v1/
+28117	Alistipes putredinis	GCF_046603865.1	B	2576134	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/046/603/865/GCF_046603865.1_ASM4660386v1/
+28198	Aliarcobacter cryaerophilus	GCF_003660105.1	A	2108340	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/660/105/GCF_003660105.1_ASM366010v1/
+28198	Aliarcobacter cryaerophilus	GCF_977971515.1	A	2447816	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/977/971/515/GCF_977971515.1_INC3/
+28198	Aliarcobacter cryaerophilus	GCF_014352915.1	B	2136856	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/014/352/915/GCF_014352915.1_ASM1435291v1/
+2822760	Rhodoferax sp. PAMC 29310	GCF_017948265.1	AB	4593249	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/017/948/265/GCF_017948265.1_ASM1794826v1/
+2908637	Acinetobacter sp. SCLZS86	GCF_021560715.1	AB	3367472	Chromosome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/021/560/715/GCF_021560715.1_ASM2156071v1/
+2925837	Acinetobacter sp. LUNF3	GCF_022699605.1	AB	3419515	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/022/699/605/GCF_022699605.1_ASM2269960v1/
+296	Pseudomonas fragi	GCF_015476275.1	A	5077209	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/015/476/275/GCF_015476275.1_ASM1547627v1/
+296	Pseudomonas fragi	GCF_062047177.1	A	5013382	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/047/177/GCF_062047177.1_ASM62047177v1/
+296	Pseudomonas fragi	GCF_061143215.1	B	5188178	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/061/143/215/GCF_061143215.1_ASM6114321v1/
+2976818	Cloacibacterium sp. TD35	GCF_028864635.1	AB	2595287	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/028/864/635/GCF_028864635.1_ASM2886463v1/
+3036128	Diaphorobacter limosus	GCF_033100095.1	AB	4099615	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/033/100/095/GCF_033100095.1_ASM3310009v1/
+3045147	Acinetobacter corruptisaponis	GCF_030053775.1	AB	4152000	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/030/053/775/GCF_030053775.1_ASM3005377v1/
+3064892	Psychrobacter sp. van23A	GCF_030845275.1	AB	3212803	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/030/845/275/GCF_030845275.1_ASM3084527v1/
+3122375	Pseudomonas sp. ML2-2023-3	GCF_037055275.1	AB	5409590	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/037/055/275/GCF_037055275.1_ASM3705527v1/
+3130163	Brachymonas sp. G13	GCF_045055315.1	A	2407891	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/045/055/315/GCF_045055315.1_ASM4505531v1/
+3130163	Brachymonas sp. G13	GCF_037416425.1	A	2439362	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/037/416/425/GCF_037416425.1_ASM3741642v1/
+3130163	Brachymonas sp. G13	GCF_037406315.1	B	2498864	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/037/406/315/GCF_037406315.1_ASM3740631v1/
+3140252	Acidovorax sp. FHTAMBA	GCF_038958875.1	AB	4752276	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/038/958/875/GCF_038958875.1_ASM3895887v1/
+321846	Pseudomonas simiae	GCF_000934565.1	A	6143950	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/934/565/GCF_000934565.1_ASM93456v1/
+321846	Pseudomonas simiae	GCF_056858215.1	A	6185137	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/056/858/215/GCF_056858215.1_ASM5685821v1/
+321846	Pseudomonas simiae	GCF_052820115.1	B	6094443	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/052/820/115/GCF_052820115.1_ASM5282011v1/
+328813	Alistipes onderdonkii	GCF_006542645.1	A	3507492	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/542/645/GCF_006542645.1_Aond_1.0/
+328813	Alistipes onderdonkii	GCF_042855425.1	A	3534599	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/042/855/425/GCF_042855425.1_ASM4285542v1/
+328813	Alistipes onderdonkii	GCF_025145285.1	B	3869542	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/025/145/285/GCF_025145285.1_ASM2514528v1/
+3366266	Acinetobacter sp. P1332	GCF_044057475.1	AB	4017868	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/044/057/475/GCF_044057475.1_ASM4405747v1/
+34062	Moraxella osloensis	GCF_001553955.1	A	2649137	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/553/955/GCF_001553955.1_ASM155395v1/
+34062	Moraxella osloensis	GCF_058182175.1	A	2780109	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/058/182/175/GCF_058182175.1_LaCa_47_v1/
+34062	Moraxella osloensis	GCF_040364415.1	B	2850010	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/040/364/415/GCF_040364415.1_ASM4036441v1/
+358220	Acidovorax sp. KKS102	GCF_000302535.1	AB	5196935	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/302/535/GCF_000302535.1_ASM30253v1/
+39491	Agathobacter rectalis	GCF_022453685.1	A	3451485	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/022/453/685/GCF_022453685.1_ASM2245368v1/
+39491	Agathobacter rectalis	GCF_988232255.1	A	3501195	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/232/255/GCF_988232255.1_AM115-45/
+39491	Agathobacter rectalis	GCF_988232315.1	B	3435587	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/232/315/GCF_988232315.1_AM115-56_contig_19_np1/
+40214	Acinetobacter johnsonii	GCF_000368805.1	A	3540498	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/368/805/GCF_000368805.1_Acin_john_ANC_3681_V1/
+40214	Acinetobacter johnsonii	GCF_988236795.1	A	4113349	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/236/795/GCF_988236795.1_PF3HH25001/
+40214	Acinetobacter johnsonii	GCF_059447105.1	B	3809748	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/059/447/105/GCF_059447105.1_ASM5944710v1/
+40215	Acinetobacter junii	GCF_018336855.1	A	3438557	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/018/336/855/GCF_018336855.1_ASM1833685v1/
+40215	Acinetobacter junii	GCF_060274115.1	A	3508810	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/060/274/115/GCF_060274115.1_ASM6027411v1/
+40215	Acinetobacter junii	GCF_059339415.1	B	3435066	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/059/339/415/GCF_059339415.1_ASM5933941v1/
+418240	Blautia wexlerae	GCF_025148125.1	A	4685728	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/025/148/125/GCF_025148125.1_ASM2514812v1/
+418240	Blautia wexlerae	GCF_988233565.1	A	4222097	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/233/565/GCF_988233565.1_AM115-58_contig_1_np1/
+418240	Blautia wexlerae	GCF_988235105.1	B	4310702	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/235/105/GCF_988235105.1_JF-4C-33/
+437897	Megamonas funiformis	GCF_000378365.1	A	2330046	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/378/365/GCF_000378365.1_ASM37836v1/
+437897	Megamonas funiformis	GCF_988232665.1	A	2578858	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/232/665/GCF_988232665.1_AM115-51_contig_7_np1/
+437897	Megamonas funiformis	GCF_988232735.1	B	2571672	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/232/735/GCF_988232735.1_AM115-15_contig_5_np1/
+470	Acinetobacter baumannii	GCF_009035845.1	A	3999136	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/035/845/GCF_009035845.1_ASM903584v1/
+470	Acinetobacter baumannii	GCF_059816305.2	A	3883710	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/059/816/305/GCF_059816305.2_ASM59816305v2/
+470	Acinetobacter baumannii	GCF_062075452.1	B	3862613	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/075/452/GCF_062075452.1_ASM62075452v1/
+477666	Bacteroides graminisolvens	GCF_000428125.1	AB	3633399	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/428/125/GCF_000428125.1_ASM42812v1/
+47920	Acidovorax delafieldii	GCF_007993815.1	A	5022177	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/007/993/815/GCF_007993815.1_ASM799381v1/
+47920	Acidovorax delafieldii	GCF_044056765.1	A	5003996	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/044/056/765/GCF_044056765.1_Isolate30/
+47920	Acidovorax delafieldii	GCF_062012379.1	B	4277634	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/012/379/GCF_062012379.1_ASM62012379v1/
+487173	Dialister succinatiphilus	GCF_000242435.1	AB	2499879	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/242/435/GCF_000242435.1_Dial_succ_YIT_11850_V1/
+553814	Acidovorax carolinensis	GCF_002157165.1	A	4058023	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/157/165/GCF_002157165.1_ASM215716v1/
+553814	Acidovorax carolinensis	GCF_002157125.1	A	4704737	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/157/125/GCF_002157125.1_ASM215712v1/
+553814	Acidovorax carolinensis	GCF_002157145.1	B	4122625	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/157/145/GCF_002157145.1_ASM215714v1/
+562	Escherichia coli	GCF_000008865.2	A	5594605	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/865/GCF_000008865.2_ASM886v2/
+562	Escherichia coli	GCF_000005845.2	A	4641652	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/
+562	Escherichia coli	GCF_062091669.1	B	4956986	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/091/669/GCF_062091669.1_ASM62091669v1/
+58169	Rahnella inusitata	GCF_018288855.1	A	5471205	Chromosome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/018/288/855/GCF_018288855.1_ASM1828885v1/
+58169	Rahnella inusitata	GCF_057812115.1	A	4924327	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/057/812/115/GCF_057812115.1_ASM5781211v1/
+58169	Rahnella inusitata	GCF_047393845.1	B	5186361	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/047/393/845/GCF_047393845.1_ASM4739384v1/
+61648	Kluyvera intermedia	GCF_009649915.1	A	4938529	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/649/915/GCF_009649915.1_ASM964991v1/
+61648	Kluyvera intermedia	GCF_057838605.1	A	4787033	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/057/838/605/GCF_057838605.1_ASM5783860v1/
+61648	Kluyvera intermedia	GCF_040893145.1	B	5180388	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/040/893/145/GCF_040893145.1_ASM4089314v1/
+639200	Sphaerotilus sulfidivorans	GCF_008329925.1	A	4430992	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/008/329/925/GCF_008329925.1_ASM832992v1/
+639200	Sphaerotilus sulfidivorans	GCF_052921225.1	A	4788873	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/052/921/225/GCF_052921225.1_ASM5292122v1/
+639200	Sphaerotilus sulfidivorans	GCF_052921265.1	B	4265997	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/052/921/265/GCF_052921265.1_ASM5292126v1/
+645	Aeromonas salmonicida	GCF_028355655.1	A	4954811	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/028/355/655/GCF_028355655.1_ASM2835565v1/
+645	Aeromonas salmonicida	GCF_990192359.1	A	4845759	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/990/192/359/GCF_990192359.1_CAE1414_v1/
+645	Aeromonas salmonicida	GCF_061573165.1	B	4583717	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/061/573/165/GCF_061573165.1_ASM61573165v1/
+70346	Acinetobacter variabilis	GCF_030518655.1	A	3443915	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/030/518/655/GCF_030518655.1_ASM3051865v1/
+70346	Acinetobacter variabilis	GCF_057471025.1	A	3481399	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/057/471/025/GCF_057471025.1_ASM5747102v1/
+70346	Acinetobacter variabilis	GCF_057471035.1	B	3824329	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/057/471/035/GCF_057471035.1_ASM5747103v1/
+74426	Collinsella aerofaciens	GCF_010509075.1	A	2455328	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/010/509/075/GCF_010509075.1_ASM1050907v1/
+74426	Collinsella aerofaciens	GCF_988238325.1	A	2370522	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/238/325/GCF_988238325.1_RSZYD15080744_A/
+74426	Collinsella aerofaciens	GCF_988238805.1	B	2387391	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/238/805/GCF_988238805.1_RSZYD15090424_A/
+756892	Acinetobacter indicus	GCF_009914475.1	A	3084932	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/914/475/GCF_009914475.1_ASM991447v1/
+756892	Acinetobacter indicus	GCF_057380785.1	A	3109480	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/057/380/785/GCF_057380785.1_ASM5738078v1/
+756892	Acinetobacter indicus	GCF_048572815.1	B	3095216	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/048/572/815/GCF_048572815.1_ASM4857281v1/
+758826	Acidovorax radicis	GCF_056858255.1	A	5542670	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/056/858/255/GCF_056858255.1_ASM5685825v1/
+758826	Acidovorax radicis	GCF_020510705.1	A	4995154	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/020/510/705/GCF_020510705.1_ASM2051070v1/
+758826	Acidovorax radicis	GCF_000204195.1	B	5530232	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/204/195/GCF_000204195.1_ASM20419v1/
+80878	Acidovorax temperans	GCF_028596105.1	A	4730769	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/028/596/105/GCF_028596105.1_ASM2859610v1/
+80878	Acidovorax temperans	GCF_037314375.1	A	4134562	Chromosome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/037/314/375/GCF_037314375.1_ASM3731437v1/
+80878	Acidovorax temperans	GCF_965209425.1	B	4124437	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/965/209/425/GCF_965209425.1_isolate-87.bin/
+817	Bacteroides fragilis	GCF_000025985.1	A	5241700	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/025/985/GCF_000025985.1_ASM2598v1/
+817	Bacteroides fragilis	GCF_062023761.1	A	5548750	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/023/761/GCF_062023761.1_ASM62023761v1/
+817	Bacteroides fragilis	GCF_062023762.1	B	5393691	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/023/762/GCF_062023762.1_ASM62023762v1/
+820	Bacteroides uniformis	GCF_044361425.1	A	4709701	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/044/361/425/GCF_044361425.1_ASM4436142v1/
+820	Bacteroides uniformis	GCF_988230195.1	A	4478235	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/230/195/GCF_988230195.1_AF120-10-104_contig_2_np1/
+820	Bacteroides uniformis	GCF_988230545.1	B	4443180	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/230/545/GCF_988230545.1_AF120-11-104/
+821	Phocaeicola vulgatus	GCF_000012825.1	A	5163189	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/012/825/GCF_000012825.1_ASM1282v1/
+821	Phocaeicola vulgatus	GCF_988230155.1	A	5477699	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/230/155/GCF_988230155.1_AF120-101-WCA_contig_1_np1/
+821	Phocaeicola vulgatus	GCF_988230465.1	B	5239749	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/230/465/GCF_988230465.1_AF117-96-WCA_contig_7_np1/
+82803	Trichococcus flocculiformis	GCF_062085691.1	A	3055308	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/062/085/691/GCF_062085691.1_ASM62085691v1/
+82803	Trichococcus flocculiformis	GCF_051096315.1	A	3085646	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/051/096/315/GCF_051096315.1_ASM5109631v1/
+82803	Trichococcus flocculiformis	GCF_900129415.1	B	3062999	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/129/415/GCF_900129415.1_IMG-taxon_2619618835_annotated_assembly/
+83655	Leclercia adecarboxylata	GCF_020097395.1	A	5057123	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/020/097/395/GCF_020097395.1_ASM2009739v1/
+83655	Leclercia adecarboxylata	GCF_060807235.1	A	5170693	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/060/807/235/GCF_060807235.1_ASM6080723v1/
+83655	Leclercia adecarboxylata	GCF_059947445.1	B	4793312	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/059/947/445/GCF_059947445.1_ASM5994744v1/
+853	Faecalibacterium prausnitzii	GCF_000154385.1	A	3127383	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/154/385/GCF_000154385.1_ASM15438v1/
+853	Faecalibacterium prausnitzii	GCF_058248305.1	A	3070145	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/058/248/305/GCF_058248305.1_ASM5824830v1/
+853	Faecalibacterium prausnitzii	GCF_052659795.1	B	2804975	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/052/659/795/GCF_052659795.1_ASM5265979v1/
+861445	Psychrobacter sanguinis	GCF_020731205.1	A	3160144	Scaffold	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/020/731/205/GCF_020731205.1_ASM2073120v1/
+861445	Psychrobacter sanguinis	GCF_020736705.1	A	3395670	Chromosome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/020/736/705/GCF_020736705.1_ASM2073670v1/
+861445	Psychrobacter sanguinis	GCF_042679025.1	B	3201556	Contig	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/042/679/025/GCF_042679025.1_ASM4267902v1/
+86185	Pseudomonas lundensis	GCF_015377145.2	A	4934136	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/015/377/145/GCF_015377145.2_2T-2-5-2v4/
+86185	Pseudomonas lundensis	GCF_055413385.1	A	4977874	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/055/413/385/GCF_055413385.1_ASM5541338v1/
+86185	Pseudomonas lundensis	GCF_055413515.1	B	5087733	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/055/413/515/GCF_055413515.1_ASM5541351v1/
+876	Desulfovibrio desulfuricans	GCF_017815575.1	A	3554892	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/017/815/575/GCF_017815575.1_ASM1781557v1/
+876	Desulfovibrio desulfuricans	GCF_046603805.1	A	3331362	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/046/603/805/GCF_046603805.1_ASM4660380v1/
+876	Desulfovibrio desulfuricans	GCF_021365555.1	B	3401021	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/021/365/555/GCF_021365555.1_ASM2136555v1/
+88431	Dorea longicatena	GCF_025150085.1	A	2919963	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/025/150/085/GCF_025150085.1_ASM2515008v1/
+88431	Dorea longicatena	GCF_988233105.1	A	3316380	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/233/105/GCF_988233105.1_AF120-90-WCA_contig_2_np1/
+88431	Dorea longicatena	GCF_988234605.1	B	3281021	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/988/234/605/GCF_988234605.1_JF-4C-13/
+907	Megasphaera elsdenii	GCF_003010495.1	A	2478942	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/010/495/GCF_003010495.1_ASM301049v1/
+907	Megasphaera elsdenii	GCF_057585575.1	A	2697374	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/057/585/575/GCF_057585575.1_ASM5758557v1/
+907	Megasphaera elsdenii	GCF_059704585.1	B	2597589	Complete Genome	https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/059/704/585/GCF_059704585.1_ASM5970458v1/

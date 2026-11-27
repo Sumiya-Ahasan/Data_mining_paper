@@ -44,6 +44,9 @@ Legend: [x] done · [ ] todo · (YOU) = manual step for the researcher · (C) = 
 - [x] (C) Check G2 test v2: G2 FAIL for every decoy type (U, N, M, N+M), also with target nulls in score training and when restricted to non-efflux or inactivation-only targets → results/g2v2/
 - [x] Calibration-null source decided: simulated communities, labelled nulls (plan v3; inform supervisor)
 - [x] (C) Simulated-community pipeline + conformal evaluation (src/community.py, src/conformal_eval.py), tested locally
-- [ ] (YOU) Run notebooks/simcomm_kaggle.md (dm_simcomm; inputs dm_g2v2 output, dm_g2ext output, ww-bg-5m); send simcomm_results.tgz
+- [x] (YOU) Run notebooks/simcomm_kaggle.md (dm_simcomm, 2026-11-27, ~53 min, SIMCOMM FINISHED OK)
+- [x] (C) Check simcomm: V1 PASS (both labelled-null arms, all q); V2 pooled fails at q>=0.10 under shift, Mondrian holds at 0.10/0.20; decoy arm FAIL (FDR 0.22-0.24 at every q); R FAIL (simulation covers only 8-27% of real reads; 5-10x fewer target reads) → results/simcomm/
+- [ ] Decide realism fix (researcher + supervisor): simulation must cover the unclassified 67-78% of reads before V1 says anything about real wastewater
+- [ ] (C) realism_units.tsv added to community.py realism (per-unit real vs sim hits); runs with the next simcomm version
 - [ ] (YOU) Tell supervisor: decoys failed G2 twice; main method now calibrates on simulated communities (plan v3, §8b assumptions)
 - [ ] (YOU) Security: rotate the GitHub token (it was stored in repo/.git/config inside Kaggle outputs of all 3 notebooks; fixed in the notebook code); delete C:/Users/User/Downloads/g2v2_results.zip after Claude's check
